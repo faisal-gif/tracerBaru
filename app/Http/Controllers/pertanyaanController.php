@@ -260,8 +260,30 @@ class pertanyaanController extends Controller
     }
     public function export_excel($idForm)
     {
-        $isi=jawaban::where('idForm', $idForm)->get()->toArray();
-        $export = new jawabanExport($isi);
+        $pilGan=['choice','select'];
+        $isian=['text','textarea'];
+        $isi=jawaban::where('idForm', $idForm)->get();
+        $valPil;
+        $valTxt;
+        $valEm;
+        $keyPil;
+        $keyTxt;
+      
+            foreach ($isi as $i) {
+                foreach($i->pilihanGanda as $b => $val){
+                    $valPil[$b]=$val;
+                    
+                }
+                foreach($i->text as $c => $val2){
+                    $valTxt[$c]=$val2;
+                    
+                }
+                $valEm['email']=$i->email;
+                
+                $ll[]=array_merge($valEm,$valTxt,$valPil);
+            }
+           
+        $export = new jawabanExport($ll);
         
         return Excel::download($export, 'coba.xlsx');
     }
