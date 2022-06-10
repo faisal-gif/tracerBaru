@@ -61,7 +61,7 @@ Route::get('/listForm', 'pertanyaanController@listForm');
 Route::get('/showPertanyaan/{idForm}', 'pertanyaanController@listPertanyaan');
 Route::get('/formPertanyaan/{idForm}', 'pertanyaanController@formPertanyaan');
 Route::post('/prosesBuat', 'pertanyaanController@prosesBuat');
-Route::get('/pertanyaan/{idForm}', 'pertanyaanController@pertanyaan')->name('pertanyaan');
+Route::get('/pertanyaan/{idForm}/{nim?}', 'pertanyaanController@pertanyaan')->name('pertanyaan');
 Route::post('/copyPertanyaan/{idForm}', 'pertanyaanController@copyPertanyaan');
 Route::get('/deletePertanyaan/{id}', 'pertanyaanController@delPertanyaan');
 Route::get('/editPertanyaan/{id}', 'pertanyaanController@editPertanyaan');

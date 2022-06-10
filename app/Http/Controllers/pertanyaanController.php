@@ -23,7 +23,7 @@ class pertanyaanController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('pertanyaan','prosesIsi');
+        $this->middleware('auth')->except('pertanyaan', 'prosesIsi');
     }
     public function formPertanyaan($idForm)
     {
@@ -64,20 +64,45 @@ class pertanyaanController extends Controller
         return redirect('/showPertanyaan'.'/'.$idForm);
     }
 
-    public function pertanyaan(FormBuilder $formBuilder, $idForm)
+    public function pertanyaan(FormBuilder $formBuilder, $idForm, $nim = null)
     {
         $coba=pertanyaan::where('idForm', $idForm)->get()->toArray();
-        $idForm=[
-            $idForm=
-            ['name' => 'idForm',
-            'type' => 'hidden',
-            'value' => $idForm,
-        ], $idForm=
+        if ($nim != null) {
+            $emailAl=biodata::where('nim', $nim)->first();
+            $idForm=[
+                $idForm=
+                ['name' => 'idForm',
+                'type' => 'hidden',
+                'value' => $idForm,
+            ], $email=
+            [
+            'name' => 'Email*',
+            'type' => 'static',
+            'tag' => 'div',
+            'attr' => ['class' => 'form-control-static'],
+            'value' => $emailAl->email,
+        ],
+        $idForm=
         ['name' => 'email',
         'label' => 'email*',
-        'type' => 'email',
+        'type' => 'hidden',
+        'value' => $emailAl->email,
     ],
-        ];
+            ];
+        } else {
+            $idForm=[
+                $idForm=
+                ['name' => 'idForm',
+                'type' => 'hidden',
+                'value' => $idForm,
+            ], $idForm=
+            ['name' => 'email',
+            'label' => 'email*',
+            'type' => 'email',
+        ],
+            ];
+        }
+       
         $sbmt=[
         $submit=
         ['name' => 'submit',
@@ -95,7 +120,7 @@ class pertanyaanController extends Controller
     public function prosesBuat(Request $request)
     {
         $add=new pertanyaan();
-        $nama= str_replace(' ', '', $request->input('nama'));
+        $nama= preg_replace('/[^a-zA-Z0-9_ -]/s ','', $request->input('nama'));
         $add->name = $nama;
         $add->idForm=$request->input('idForm');
         $add->type = $request->input('type');
@@ -140,7 +165,7 @@ class pertanyaanController extends Controller
     public function prosesEdit(Request $request)
     {
         $add=pertanyaan::where('_id', $request->input('id'))->first();
-        $nama= str_replace(' ', '', $request->input('nama'));
+        $nama=  preg_replace('/[^a-zA-Z0-9_-]/s ', '', $request->input('nama'));
         $add->name = $nama;
         $add->idForm=$request->input('idForm');
         $add->type = $request->input('type');
@@ -185,11 +210,11 @@ class pertanyaanController extends Controller
 
     public function prosesIsi(Request $request, FormBuilder $formBuilder)
     {
-        $emailBio=biodata::where('email',$request->input('email'))->first();
+        $emailBio=biodata::where('email', $request->input('email'))->first();
 
         $email=jawaban::where('email', $request->input('email'))->first();
         if ($email == null) {
-            if($emailBio != null){
+            if ($emailBio != null) {
                 $pilGan=['choice','select'];
                 $isian=['text','textarea'];
         
@@ -202,10 +227,14 @@ class pertanyaanController extends Controller
                 $form3= $formBuilder->createByArray($coba3);
                 $ad = $form3->getFieldValues();
                 $path=[];
+                
                 foreach ($ad as $key => $val) {
-                    $isi = time().'.'.$val->getClientOriginalExtension();
-                    $path[$key] =(string) $val->move('file', $isi);
+                    if ($val != null) {
+                        $isi = time().'.'.$val->getClientOriginalExtension();
+                        $path[$key] =(string) $val->move('file', $isi);
+                    }
                 }
+               
                 $add=new jawaban();
                 $add->email=$request->input('email');
                 $add->idForm=$request->input('idForm');
@@ -215,15 +244,12 @@ class pertanyaanController extends Controller
 
                 $add->save();
                 return redirect()->back()->with('success', 'Data telah tersimpan');
-            }
-            else{
+            } else {
                 return redirect()->back()->withErrors(['msg' => 'Email yang anda gunakan belum terdaftar']);
             }
-        }
-        else{
+        } else {
             return redirect()->back()->withErrors(['msg' => 'Email Yang anda Masukan Sudah Digunakan']);
         }
-
     }
 
     
@@ -275,19 +301,17 @@ class pertanyaanController extends Controller
         $keyPil;
         $keyTxt;
       
-            foreach ($isi as $i) {
-                foreach($i->pilihanGanda as $b => $val){
-                    $valPil[$b]=$val;
-                    
-                }
-                foreach($i->text as $c => $val2){
-                    $valTxt[$c]=$val2;
-                    
-                }
-                $valEm['email']=$i->email;
-                
-                $ll[]=array_merge($valEm,$valTxt,$valPil);
+        foreach ($isi as $i) {
+            foreach ($i->pilihanGanda as $b => $val) {
+                $valPil[$b]=$val;
             }
+            foreach ($i->text as $c => $val2) {
+                $valTxt[$c]=$val2;
+            }
+            $valEm['email']=$i->email;
+                
+            $ll[]=array_merge($valEm, $valTxt, $valPil);
+        }
            
         $export = new jawabanExport($ll);
         
@@ -369,11 +393,11 @@ class pertanyaanController extends Controller
     public function listPengisi()
     {
         $jawaban= jawaban::with('biodata')->get();
-        return view('showPengisi',compact('jawaban'));
+        return view('showPengisi', compact('jawaban'));
     }
-    public function pertanyaanAlumni(FormBuilder $formBuilder, $idForm,$nim)
+    public function pertanyaanAlumni(FormBuilder $formBuilder, $idForm, $nim)
     {
-        $emailA=biodata::where('nim',$nim)->first();
+        $emailA=biodata::where('nim', $nim)->first();
         $coba=pertanyaan::where('idForm', $idForm)->get()->toArray();
         $idForm=[
             $idForm=

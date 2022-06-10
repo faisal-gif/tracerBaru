@@ -185,7 +185,9 @@
           @endif
           @if(Gate::check('alumni'))
           <li class="nav-item">
-            <a class="nav-link" href="@yield('isiForm')" aria-controls="form-elements">
+          @foreach(\App\kirimForm::all() as $l)
+            <a class="nav-link" href="{{$l->link}}/{{ Auth::user()->id }}" aria-controls="form-elements">
+            @endforeach
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Isi Form</span>
             </a>
