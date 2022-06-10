@@ -19,8 +19,9 @@
                 
             </tr>
         </thead>
-        <tbody>
         @foreach($pertanyaan as $p)
+        <tbody>
+       
                         <tr>
                         <td>
                         {{$p->name}}
@@ -38,8 +39,9 @@
                           </td>
                           
                         </tr>
-                        @endforeach
+                       
                         </tbody>
+                        @endforeach
                     </table>
                 </div>
               </div>
