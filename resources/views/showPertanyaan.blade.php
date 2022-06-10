@@ -19,12 +19,12 @@
                 
             </tr>
         </thead>
-        @foreach($pertanyaan as $p)
+        
         <tbody>
-       
+        @foreach($pertanyaan as $p)
                         <tr>
                         <td>
-                        {{ Str::limit( $p->name, 50),$end='......' }}
+                        {{ Str::limit( $p->label, 50),$end='......' }}
                           </td>
                           <td>
                           {{$p->type}}
@@ -39,9 +39,9 @@
                           </td>
                           
                         </tr>
-                       
-                        </tbody>
                         @endforeach
+                        </tbody>
+                       
                     </table>
                 </div>
               </div>
