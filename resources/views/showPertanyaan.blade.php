@@ -24,7 +24,7 @@
        
                         <tr>
                         <td>
-                        {{ Str::limit(p->label, 50),$end='......' }}
+                        {{ Str::limit( $p->label, 50),$end='......' }}
                           </td>
                           <td>
                           {{$p->type}}
