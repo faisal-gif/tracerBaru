@@ -20,7 +20,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Nama</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="nama" value="{{$p->name}}"/>
+                            <input type="text" class="form-control" name="nama" value="{{$p->label}}"/>
                             <input type="hidden" name="id" value="{{$p->_id}}"/>
                             <input type="hidden" name="idForm" value="{{$p->idForm}}"/>
                           </div>

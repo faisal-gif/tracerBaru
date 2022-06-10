@@ -52,7 +52,7 @@
   </td>
         <br>
 </table>
-                            @endforeach
+                            
                             
                             </div>
                           
@@ -64,12 +64,21 @@
                   </div>
                 </div>
                 <div class="card-footer text-right">
-                <a class="btn btn-success btn-sm" href="#">
+                  @if($b->status == 'subscribe')
+                <a class="btn btn-success btn-sm" href="/subscribe/{{auth()->user()->id}}">
                           Unsubscribe
                           </a>
+                          @endif
+                          @if($b->status == 'unsubscribe')
+                <a class="btn btn-success btn-sm" href="/subscribe/{{auth()->user()->id}}">
+                          Subscribe
+                          </a>
+                          @endif
+                  
               </div>  
               </div>
-             
+            
+              @endforeach
             </div>
           </div>
 

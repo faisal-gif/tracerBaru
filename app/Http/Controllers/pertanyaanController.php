@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\pertanyaan;
+use App\biodata;
 use App\jawaban;
 use App\form;
 use App\kirimForm;
@@ -184,35 +185,40 @@ class pertanyaanController extends Controller
 
     public function prosesIsi(Request $request, FormBuilder $formBuilder)
     {
+        $emailBio=biodata::where('email',$request->input('email'))->first();
 
         $email=jawaban::where('email', $request->input('email'))->first();
         if ($email == null) {
-            
-            $pilGan=['choice','select'];
-            $isian=['text','textarea'];
+            if($emailBio != null){
+                $pilGan=['choice','select'];
+                $isian=['text','textarea'];
         
-            $coba=pertanyaan::where('idForm', $request->input('idForm'))->whereIn('type', $pilGan)->get()->toArray();
-            $coba2=pertanyaan::where('idForm', $request->input('idForm'))->whereIn('type', $isian)->get()->toArray();
-            $coba3=pertanyaan::where('idForm', $request->input('idForm'))->where('type', 'file')->get()->toArray();
-            $pr=pertanyaan::where('idForm', $request->input('idForm'))->where('type', 'file')->get();
-            $form = $formBuilder->createByArray($coba);
-            $form2 = $formBuilder->createByArray($coba2);
-            $form3= $formBuilder->createByArray($coba3);
-            $ad = $form3->getFieldValues();
-            $path=[];
-            foreach ($ad as $key => $val) {
-                $isi = time().'.'.$val->getClientOriginalExtension();
-                $path[$key] =(string) $val->move('file', $isi);
-            }
-            $add=new jawaban();
-            $add->email=$request->input('email');
-            $add->idForm=$request->input('idForm');
-            $add->pilihanGanda=$form->getFieldValues();
-            $add->text=$form2->getFieldValues();
-            $add->file=$path;
+                $coba=pertanyaan::where('idForm', $request->input('idForm'))->whereIn('type', $pilGan)->get()->toArray();
+                $coba2=pertanyaan::where('idForm', $request->input('idForm'))->whereIn('type', $isian)->get()->toArray();
+                $coba3=pertanyaan::where('idForm', $request->input('idForm'))->where('type', 'file')->get()->toArray();
+                $pr=pertanyaan::where('idForm', $request->input('idForm'))->where('type', 'file')->get();
+                $form = $formBuilder->createByArray($coba);
+                $form2 = $formBuilder->createByArray($coba2);
+                $form3= $formBuilder->createByArray($coba3);
+                $ad = $form3->getFieldValues();
+                $path=[];
+                foreach ($ad as $key => $val) {
+                    $isi = time().'.'.$val->getClientOriginalExtension();
+                    $path[$key] =(string) $val->move('file', $isi);
+                }
+                $add=new jawaban();
+                $add->email=$request->input('email');
+                $add->idForm=$request->input('idForm');
+                $add->pilihanGanda=$form->getFieldValues();
+                $add->text=$form2->getFieldValues();
+                $add->file=$path;
 
-            $add->save();
-            return redirect()->back()->with('success', 'Data telah tersimpan');
+                $add->save();
+                return redirect()->back()->with('success', 'Data telah tersimpan');
+            }
+            else{
+                return redirect()->back()->withErrors(['msg' => 'Email yang anda gunakan belum terdaftar']);
+            }
         }
         else{
             return redirect()->back()->withErrors(['msg' => 'Email Yang anda Masukan Sudah Digunakan']);
@@ -362,7 +368,36 @@ class pertanyaanController extends Controller
     }
     public function listPengisi()
     {
-        $jawaban= jawaban::all();
+        $jawaban= jawaban::with('biodata')->get();
         return view('showPengisi',compact('jawaban'));
+    }
+    public function pertanyaanAlumni(FormBuilder $formBuilder, $idForm,$nim)
+    {
+        $emailA=biodata::where('nim',$nim)->first();
+        $coba=pertanyaan::where('idForm', $idForm)->get()->toArray();
+        $idForm=[
+            $idForm=
+            ['name' => 'idForm',
+            'type' => 'hidden',
+            'value' => $idForm,
+        ], $idForm=
+        ['name' => 'email',
+        'label' => 'email*',
+        'value' => $emailA->email,
+        'type' => 'email',
+    ],
+        ];
+        $sbmt=[
+        $submit=
+        ['name' => 'submit',
+        'type' => 'submit',
+    ],
+    ];
+        $ad=array_merge($idForm, $coba, $sbmt);
+        $form = $formBuilder->createByArray($ad, [
+    'method' => 'POST',
+    'url' => '/jawaban']);
+
+        return view('hasilForm', compact('form'));
     }
 }

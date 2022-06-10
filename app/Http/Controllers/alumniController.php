@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\biodata;
 use App\dataAlumni;
 use App\User;
+use App\kirimForm;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\alumniImport;
@@ -17,7 +18,6 @@ class alumniController extends Controller
     public function index($id)
     {
         $alum = biodata::where('nim', $id)->get();
-        
         return view('alumniDash',compact('alum'));
     }
     public function __construct()
@@ -166,4 +166,18 @@ class alumniController extends Controller
 		Excel::import(new dataAlumniImport, public_path('/file_alumni/'.$nama_file));
 		return redirect()->back();
 	}
+    public function subscribe($nim)
+    {
+        $bio=biodata::where('nim', $nim)->first();
+        if($bio->status == 'subscribe'){
+            $bio->status = 'unsubscribe';
+            $bio->save();
+        }
+        elseif($bio->status == 'unsubscribe'){
+            $bio->status = 'subscribe';
+            $bio->save();
+        }
+        return redirect()->back();
+    }
+
 }

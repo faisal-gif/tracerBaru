@@ -13,7 +13,10 @@
                             Tanggal Isi
                           </th>
                           <th>
-                            Pengisi
+                            Nama Pengisi
+                          </th>
+                          <th>
+                            Email Pengisi
                           </th>
                           
                         </tr>
@@ -24,6 +27,9 @@
                         <tr>
                           <td>
                           {{$j->created_at}}
+                          </td>
+                          <td>
+                          {{$j->biodata->nama}}
                           </td>
                           <td>
                           {{$j->email}}

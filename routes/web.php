@@ -39,7 +39,7 @@ Route::post('/alumni', 'alumniController@alumni')->name('alumni');
 Route::get('/dataAlumni', 'alumniController@showData');
 Route::post('/importBio', 'alumniController@importBio');
 Route::post('/importAlumni', 'alumniController@importAlumni');
-
+Route::get('/subscribe/{nim}', 'alumniController@subscribe')->name('subscribe');
 //kabarJurusan
 Route::get('/formKabar', function () {
     return view('kabarJurusan');
@@ -71,7 +71,7 @@ Route::get('/showJawaban/{idForm}', 'pertanyaanController@showJawaban');
 Route::get('/showPengisi', 'pertanyaanController@listPengisi');
 Route::get('/exportJawaban/{idForm}', 'pertanyaanController@export_excel');
 Route::get('/jawabanPdf/{idForm}', 'pertanyaanController@export_pdf');
-
+Route::get('/pertanyaanAlum/{idForm}/{nim}', 'pertanyaanController@pertanyaanAlumni')->name('pertanyaanAlum');
 //profile
 Route::get('/showProfile/{nim}', 'HomeController@showProfile')->name('showProfile');
 

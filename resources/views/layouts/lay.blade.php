@@ -183,6 +183,15 @@
             </a>
           </li>
           @endif
+          @if(Gate::check('alumni'))
+          <li class="nav-item">
+            <a class="nav-link" href="@yield('isiForm')" aria-controls="form-elements">
+              <i class="icon-columns menu-icon"></i>
+              <span class="menu-title">Isi Form</span>
+            </a>
+          </li>
+          @endif
+          
 
         </ul>
       </nav>
