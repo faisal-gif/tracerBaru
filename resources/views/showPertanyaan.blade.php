@@ -24,7 +24,7 @@
        
                         <tr>
                         <td>
-                        {{$p->name}}
+                        {{$p->label}}
                           </td>
                           <td>
                           {{$p->type}}
