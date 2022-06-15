@@ -33,10 +33,10 @@
 
      <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="/about" class="nav-link">Tentang Kami</a></li>
-          <li class="nav-item"><a href="/testimoni" class="nav-link">Alumni</a></li>
-          <li class="nav-item"><a href="/kabarr" class="nav-link">Artikel</a></li>
+        <li class="nav-item {{ request()->segment(1) == '/' ? 'active' : '' }}"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item {{ (request()->segment(1) == 'about') ? 'active' : '' }}"><a href="/about" class="nav-link">Tentang Kami</a></li>
+          <li class="nav-item {{ request()->segment(1) == 'testimoni' ? 'active' : '' }}"><a href="/testimoni" class="nav-link">Alumni</a></li>
+          <li class="nav-item {{ request()->segment(1) == 'kabarr' ? 'active' : '' }}"><a href="/kabarr" class="nav-link">Artikel</a></li>
           <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
         </ul>
       </div>
@@ -44,7 +44,7 @@
  </nav>
  <!-- END nav -->
  
- <section class="hero-wrap hero-wrap-2" style="background-image: url({{asset('images/bg_2.jpg')}});">
+ <section class="hero-wrap hero-wrap-2" style="background-image: url({{asset('images/polinema.jpg')}});">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-end justify-content-center">

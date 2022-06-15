@@ -58,20 +58,23 @@ Route::get('/kabarr', 'kabarController@kabarr');
 Route::get('/buatForm', 'pertanyaanController@buatForm');
 Route::post('/prosesForm', 'pertanyaanController@prosesForm');
 Route::get('/listForm', 'pertanyaanController@listForm');
-Route::get('/showPertanyaan/{idForm}', 'pertanyaanController@listPertanyaan');
-Route::get('/formPertanyaan/{idForm}', 'pertanyaanController@formPertanyaan');
+Route::get('/showPertanyaan/{jenisForm}/{idForm}', 'pertanyaanController@listPertanyaan');
+Route::get('/formPertanyaan/{jenisForm}/{idForm}', 'pertanyaanController@formPertanyaan');
 Route::post('/prosesBuat', 'pertanyaanController@prosesBuat');
-Route::get('/pertanyaan/{idForm}/{nim?}', 'pertanyaanController@pertanyaan')->name('pertanyaan');
+Route::get('/pertanyaan/{jenisForm?}/{idForm}/{nim?}', 'pertanyaanController@pertanyaan')->name('pertanyaan');
 Route::post('/copyPertanyaan/{idForm}', 'pertanyaanController@copyPertanyaan');
 Route::get('/deletePertanyaan/{id}', 'pertanyaanController@delPertanyaan');
-Route::get('/editPertanyaan/{id}', 'pertanyaanController@editPertanyaan');
+Route::get('/editPertanyaan/{jenisForm}/{id}', 'pertanyaanController@editPertanyaan');
 Route::post('/prosesEdit', 'pertanyaanController@prosesEdit');
 Route::post('/jawaban', 'pertanyaanController@prosesIsi');
 Route::get('/showJawaban/{idForm}', 'pertanyaanController@showJawaban');
+Route::get('/showJawabanUser/{idUser}/{idForm}', 'pertanyaanController@showJawabanUser');
 Route::get('/showPengisi', 'pertanyaanController@listPengisi');
 Route::get('/exportJawaban/{idForm}', 'pertanyaanController@export_excel');
 Route::get('/jawabanPdf/{idForm}', 'pertanyaanController@export_pdf');
-Route::get('/pertanyaanAlum/{idForm}/{nim}', 'pertanyaanController@pertanyaanAlumni')->name('pertanyaanAlum');
+Route::post('/persetujuanPertanyaan/{id}', 'pertanyaanController@statusPertanyaan');
+
+
 //profile
 Route::get('/showProfile/{nim}', 'HomeController@showProfile')->name('showProfile');
 

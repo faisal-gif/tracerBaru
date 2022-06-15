@@ -25,9 +25,9 @@ class pertanyaanController extends Controller
     {
         $this->middleware('auth')->except('pertanyaan', 'prosesIsi');
     }
-    public function formPertanyaan($idForm)
+    public function formPertanyaan($jenisForm, $idForm)
     {
-        return view('formPertanyaan', compact('idForm'));
+        return view('formPertanyaan', compact('jenisForm', 'idForm'));
     }
     public function buatForm()
     {
@@ -38,11 +38,11 @@ class pertanyaanController extends Controller
         $pertanyaan=pertanyaan::where('_id', $id)->get();
         return view('editPertanyaan', compact('pertanyaan'));
     }
-    public function listPertanyaan($idForm)
+    public function listPertanyaan($jenisForm, $idForm)
     {
         $pertanyaan=pertanyaan::where('idForm', $idForm)->get();
-        $listForm=form::all();
-        return view('showPertanyaan', compact('pertanyaan', 'idForm', 'listForm'));
+        $listForm=form::where('jenisForm', $jenisForm)->get();
+        return view('showPertanyaan', compact('pertanyaan', 'idForm', 'listForm', 'jenisForm'));
     }
     public function listForm()
     {
@@ -52,21 +52,32 @@ class pertanyaanController extends Controller
     public function prosesForm(Request $request)
     {
         $check=form::where('namaForm', $request->input('nama'))->first();
+        $jenisForm = $request->input('jenisForm');
+
         if ($check != null) {
             return redirect('/');
         }
         $add=new form();
         $add->namaForm = $request->input('nama');
+        $add->jenisForm = $jenisForm;
         $add->save();
         $form=form::where('namaForm', $request->input('nama'))->first();
         $idForm=$form->id;
        
-        return redirect('/showPertanyaan'.'/'.$idForm);
+        return redirect('/showPertanyaan'.'/'.$jenisForm.'/'.$idForm);
     }
+    
 
-    public function pertanyaan(FormBuilder $formBuilder, $idForm, $nim = null)
+    public function pertanyaan(FormBuilder $formBuilder, $jenisForm, $idForm, $nim = null)
     {
-        $coba=pertanyaan::where('idForm', $idForm)->get()->toArray();
+        $jenisF=[
+            $jenisF=[
+                'name' => 'jenisForm',
+                'type' => 'hidden',
+                'value' => $jenisForm,
+            ]
+            ];
+        $coba=pertanyaan::where('idForm', $idForm)->where('status','setuju')->get()->toArray();
         if ($nim != null) {
             $emailAl=biodata::where('nim', $nim)->first();
             $idForm=[
@@ -109,7 +120,7 @@ class pertanyaanController extends Controller
         'type' => 'submit',
     ],
     ];
-        $ad=array_merge($idForm, $coba, $sbmt);
+        $ad=array_merge($jenisF, $idForm, $coba, $sbmt);
         $form = $formBuilder->createByArray($ad, [
     'method' => 'POST',
     'url' => '/jawaban']);
@@ -119,12 +130,22 @@ class pertanyaanController extends Controller
 
     public function prosesBuat(Request $request)
     {
+        $jenisForm=$request->input('jenisForm');
+        $idUser = $request->input('idUser');
+        $roles = $request->input('roles');
+        $status = "wait";
+        if($roles == "admin" || $roles == "superAdmin"){
+            $status="setuju";
+        }
         $add=new pertanyaan();
-        $nama= preg_replace('/[^a-zA-Z0-9_ -]/s ','', $request->input('nama'));
+        $nama= preg_replace('/[^a-zA-Z0-9_ -]/s ', '', $request->input('nama'));
         $add->name = $nama;
         $add->idForm=$request->input('idForm');
         $add->type = $request->input('type');
         $add->label = $request->input('nama');
+        $add->jenisForm =  $jenisForm;
+        $add->idUser = $idUser;
+        $add->status = $status;
         
       
         if ($request->input('type') == "select") {
@@ -160,10 +181,11 @@ class pertanyaanController extends Controller
 
         $add->save();
     
-        return redirect('/showPertanyaan'.'/'.$request->input('idForm'));
+        return redirect('/showPertanyaan'.'/'.$jenisForm.'/'.$request->input('idForm'));
     }
     public function prosesEdit(Request $request)
     {
+        $jenisForm=$request->input('jenisForm');
         $add=pertanyaan::where('_id', $request->input('id'))->first();
         $nama=  preg_replace('/[^a-zA-Z0-9_-]/s ', '', $request->input('nama'));
         $add->name = $nama;
@@ -205,50 +227,84 @@ class pertanyaanController extends Controller
 
         $add->save();
     
-        return redirect('/showPertanyaan'.'/'.$request->input('idForm'));
+        return redirect('/showPertanyaan'.'/'.$jenisForm.'/'.$request->input('idForm'));
     }
 
     public function prosesIsi(Request $request, FormBuilder $formBuilder)
     {
-        $emailBio=biodata::where('email', $request->input('email'))->first();
-
-        $email=jawaban::where('email', $request->input('email'))->first();
-        if ($email == null) {
-            if ($emailBio != null) {
-                $pilGan=['choice','select'];
-                $isian=['text','textarea'];
-        
-                $coba=pertanyaan::where('idForm', $request->input('idForm'))->whereIn('type', $pilGan)->get()->toArray();
-                $coba2=pertanyaan::where('idForm', $request->input('idForm'))->whereIn('type', $isian)->get()->toArray();
-                $coba3=pertanyaan::where('idForm', $request->input('idForm'))->where('type', 'file')->get()->toArray();
-                $pr=pertanyaan::where('idForm', $request->input('idForm'))->where('type', 'file')->get();
-                $form = $formBuilder->createByArray($coba);
-                $form2 = $formBuilder->createByArray($coba2);
-                $form3= $formBuilder->createByArray($coba3);
-                $ad = $form3->getFieldValues();
-                $path=[];
-                
-                foreach ($ad as $key => $val) {
-                    if ($val != null) {
-                        $isi = time().'.'.$val->getClientOriginalExtension();
-                        $path[$key] =(string) $val->move('file', $isi);
-                    }
+        $jenisF=$request->input('jenisForm');
+        if ($jenisF == 'perusahaan') {
+            $pilGan=['choice','select'];
+            $isian=['text','textarea'];
+    
+            $coba=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->whereIn('type', $pilGan)->get()->toArray();
+            $coba2=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->whereIn('type', $isian)->get()->toArray();
+            $coba3=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->where('type', 'file')->get()->toArray();
+            $pr=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->where('type', 'file')->get();
+            $form = $formBuilder->createByArray($coba);
+            $form2 = $formBuilder->createByArray($coba2);
+            $form3= $formBuilder->createByArray($coba3);
+            $ad = $form3->getFieldValues();
+            $path=[];
+            
+            foreach ($ad as $key => $val) {
+                if ($val != null) {
+                    $isi = time().'.'.$val->getClientOriginalExtension();
+                    $path[$key] =(string) $val->move('file', $isi);
                 }
-               
-                $add=new jawaban();
-                $add->email=$request->input('email');
-                $add->idForm=$request->input('idForm');
-                $add->pilihanGanda=$form->getFieldValues();
-                $add->text=$form2->getFieldValues();
-                $add->file=$path;
-
-                $add->save();
-                return redirect()->back()->with('success', 'Data telah tersimpan');
-            } else {
-                return redirect()->back()->withErrors(['msg' => 'Email yang anda gunakan belum terdaftar']);
             }
-        } else {
-            return redirect()->back()->withErrors(['msg' => 'Email Yang anda Masukan Sudah Digunakan']);
+           
+            $add=new jawaban();
+            $add->email=$request->input('email');
+            $add->idForm=$request->input('idForm');
+            $add->pilihanGanda=$form->getFieldValues();
+            $add->text=$form2->getFieldValues();
+            $add->file=$path;
+            $add->jenisForm=$jenisF;
+
+            $add->save();
+            return redirect()->back()->with('success', 'Data telah tersimpan');
+        } else if($jenisF == 'alumni'){
+            $emailBio=biodata::where('email', $request->input('email'))->first();
+            $email=jawaban::where('email', $request->input('email'))->first();
+            if ($email == null) {
+                if ($emailBio != null) {
+                    $pilGan=['choice','select'];
+                    $isian=['text','textarea'];
+            
+                    $coba=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->whereIn('type', $pilGan)->get()->toArray();
+                    $coba2=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->whereIn('type', $isian)->get()->toArray();
+                    $coba3=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->where('type', 'file')->get()->toArray();
+                    $pr=pertanyaan::where('idForm', $request->input('idForm'))->where('status','setuju')->where('type', 'file')->get();
+                    $form = $formBuilder->createByArray($coba);
+                    $form2 = $formBuilder->createByArray($coba2);
+                    $form3= $formBuilder->createByArray($coba3);
+                    $ad = $form3->getFieldValues();
+                    $path=[];
+                    
+                    foreach ($ad as $key => $val) {
+                        if ($val != null) {
+                            $isi = time().'.'.$val->getClientOriginalExtension();
+                            $path[$key] =(string) $val->move('file', $isi);
+                        }
+                    }
+                   
+                    $add=new jawaban();
+                    $add->email=$request->input('email');
+                    $add->idForm=$request->input('idForm');
+                    $add->pilihanGanda=$form->getFieldValues();
+                    $add->text=$form2->getFieldValues();
+                    $add->file=$path;
+                    $add->jenisForm=$jenisF;
+    
+                    $add->save();
+                    return redirect()->back()->with('success', 'Data telah tersimpan');
+                } else {
+                    return redirect()->back()->withErrors(['msg' => 'Email yang anda gunakan belum terdaftar']);
+                }
+            } else {
+                return redirect()->back()->withErrors(['msg' => 'Email Yang anda Masukan Sudah Digunakan']);
+            }
         }
     }
 
@@ -257,9 +313,41 @@ class pertanyaanController extends Controller
     {
         $pilGan=['choice','select'];
         $isian=['text','textarea'];
-        $pertanyaan=pertanyaan::whereIn('type', $pilGan)->where('idForm', $idForm)->get();
-        $pertanyaan2=pertanyaan::whereIn('type', $isian)->where('idForm', $idForm)->get();
-        $pertanyaan3=pertanyaan::where('type', 'file')->where('idForm', $idForm)->get();
+        $pertanyaan=pertanyaan::whereIn('type', $pilGan)->where('status','setuju')->where('idForm', $idForm)->get();
+        $pertanyaan2=pertanyaan::whereIn('type', $isian)->where('status','setuju')->where('idForm', $idForm)->get();
+        $pertanyaan3=pertanyaan::where('type', 'file')->where('status','setuju')->where('idForm', $idForm)->get();
+        $jawaban=jawaban::where('idForm', $idForm)->get();
+        $dt=[];
+        
+        foreach ($pertanyaan as $key => $p) {
+            // dd($p->choices);
+    
+
+            foreach ($p->choices as $ckey => $cval) {
+                $dt[$p->name][$p->choices[$ckey]] = 0;
+                // dd($dt);
+       
+                foreach ($jawaban as $j) {
+                    if (isset($j->pilihanGanda[$p->name])) {
+                        if ($j->pilihanGanda[$p->name] == $p->choices[$ckey]) {
+                            $dt[$p->name][$j->pilihanGanda[$p->name]] += 1;
+                        }
+                    }
+                }
+            }
+        }
+  
+ 
+        
+        return view('jawaban', compact('pertanyaan', 'pertanyaan2', 'dt', 'jawaban', 'idForm', 'pertanyaan3'));
+    }
+    public function showJawabanUser($idUser,$idForm)
+    {   
+        $pilGan=['choice','select'];
+        $isian=['text','textarea'];
+        $pertanyaan=pertanyaan::whereIn('type', $pilGan)->where('status','setuju')->where('idUser',$idUser)->where('idForm', $idForm)->get();
+        $pertanyaan2=pertanyaan::whereIn('type', $isian)->where('status','setuju')->where('idUser',$idUser)->where('idForm', $idForm)->get();
+        $pertanyaan3=pertanyaan::where('type', 'file')->where('status','setuju')->where('idUser',$idUser)->where('idForm', $idForm)->get();
         $jawaban=jawaban::where('idForm', $idForm)->get();
         $dt=[];
         
@@ -395,33 +483,13 @@ class pertanyaanController extends Controller
         $jawaban= jawaban::with('biodata')->get();
         return view('showPengisi', compact('jawaban'));
     }
-    public function pertanyaanAlumni(FormBuilder $formBuilder, $idForm, $nim)
+    public function statusPertanyaan(Request $request, $id)
     {
-        $emailA=biodata::where('nim', $nim)->first();
-        $coba=pertanyaan::where('idForm', $idForm)->get()->toArray();
-        $idForm=[
-            $idForm=
-            ['name' => 'idForm',
-            'type' => 'hidden',
-            'value' => $idForm,
-        ], $idForm=
-        ['name' => 'email',
-        'label' => 'email*',
-        'value' => $emailA->email,
-        'type' => 'email',
-    ],
-        ];
-        $sbmt=[
-        $submit=
-        ['name' => 'submit',
-        'type' => 'submit',
-    ],
-    ];
-        $ad=array_merge($idForm, $coba, $sbmt);
-        $form = $formBuilder->createByArray($ad, [
-    'method' => 'POST',
-    'url' => '/jawaban']);
-
-        return view('hasilForm', compact('form'));
+        $kabar= pertanyaan::where('_id', $id)->first();
+        $kabar->status=$request->input('status');
+        $kabar->keterangan=$request->input('note');
+        $kabar->save();
+        return redirect()->back();
     }
+
 }

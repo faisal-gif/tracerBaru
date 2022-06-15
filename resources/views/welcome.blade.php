@@ -277,10 +277,13 @@
                 <!-- <p>{{ Str::limit($testimonis->testimoni, 50) }}</p> -->
                 <p>{{$testimonis->testimoni}}</p>
                   <div class="d-flex align-items-center">
+                  @isset($testimonis->biodata)
                     <div class="user-img" style="background-image: url({{$testimonis->biodata->foto}})"></div>
+                   
                     <div class="pl-3">
                       <p class="name">{{$testimonis->biodata->nama}}</p>
                       <span class="position">{{$testimonis->biodata->prodi}}</span>
+                      @endisset
                     </div>
                   </div>
                 </div>

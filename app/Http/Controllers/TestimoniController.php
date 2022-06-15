@@ -24,7 +24,7 @@ class TestimoniController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        $testimonis = testimoni::with('biodata')->get();
+        $testimonis = testimoni::with('biodata')->where('status','setuju')->get();
         return view('testii', ['testim'=> $testimonis]);
     }
 

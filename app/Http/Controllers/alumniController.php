@@ -44,7 +44,7 @@ class alumniController extends Controller
       'noHp' => $request->input('noHp'),
       'kotaLahir' => $request->input('kotaLahir'),
       'jk' => $request->input('jk'),
-      'tanggalLahir' => $request->input('tanggalLahir'),
+      'tanggalLahir' => $request->get('tanggalLahir'),
       'prodi' => $request->input('prodi'),
       'tahunLulus' => $request->input('tahunLulus'),
       'alamat' => $request->input('alamat'),

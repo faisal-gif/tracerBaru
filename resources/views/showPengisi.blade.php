@@ -29,7 +29,8 @@
                           {{$j->created_at}}
                           </td>
                           <td>
-                          {{$j->biodata->nama}}
+                          
+                          {{optional($j->biodata)->nama}}
                           </td>
                           <td>
                           {{$j->email}}

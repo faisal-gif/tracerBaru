@@ -52,6 +52,7 @@
                           {{$u->roles}}  
                           </td>
                           <td>
+                            
                           <a class="btn btn-danger btn-sm" href="/deleteKabar/{{$u->id}}">
                            <i class="ti-trash"></i>
                           </a>

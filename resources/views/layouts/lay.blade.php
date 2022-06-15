@@ -111,21 +111,21 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-kabar" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Kabar Berita</span>
+              <span class="menu-title">Kabar Jurusan</span>
               <i class="menu-arrow"></i>
             </a>
            
             <div class="collapse" id="form-kabar">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/formKabar">Kabar</a></li>
+                <li class="nav-item"><a class="nav-link" href="/formKabar">Input Kabar</a></li>
               </ul>
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/kabarKu/{{ Auth::user()->id }}">KabarKu</a></li>
+                <li class="nav-item"><a class="nav-link" href="/kabarKu/{{ Auth::user()->id }}">Daftar Kabar</a></li>
               </ul>
               @endif
             @if(Gate::check('admin') || Gate::check('superAdmin'))
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/filterKab">Persetujuan Kabar</a></li>
+                <li class="nav-item"><a class="nav-link" href="/filterKab">Persetujuan</a></li>
               </ul>
               @endif
             </div>
@@ -154,12 +154,15 @@
             @endif
           </li>
           @if(Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin'))
-          <li class="nav-item">
-            <a class="nav-link" href="/listForm" aria-controls="form-elements">
+           
+                <li class="nav-item">
+                <a class="nav-link" href="/listForm" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Form</span>
             </a>
-          </li>
+                </li>
+              
+          
           <li class="nav-item">
             <a class="nav-link" href="/showPengisi" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>

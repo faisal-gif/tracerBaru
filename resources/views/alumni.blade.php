@@ -87,7 +87,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
                           <div class="col-sm-9">
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="tanggalLahir"/>
+                            <input type="date" class="form-control" name="tanggalLahir"/>
                           </div>
                         </div>
                       </div>

@@ -14,6 +14,9 @@
                     @csrf
                    
                     <input type="hidden" name="idForm" value="{{$idForm}}">
+                    <input type="hidden" name="jenisForm" value="{{$jenisForm}}">
+                    <input type="hidden" name="idUser" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="roles" value="{{ Auth::user()->roles }}">
                     
                     <div class="row">
                       <div class="col-md-6">

@@ -4,17 +4,31 @@
 <div class="col-7 grid-margin">
                   <div class="card mb-3">                            
   <div class="card-body">
-    <h4 class="card-title">Export</h4>
+    <h4 class="card-title">Menu</h4>
     <a href="/exportJawaban/{{$idForm}}" class="btn btn-info btn-sm"> Excel</a>
     <a href="/jawabanPdf/{{$idForm}}" class="btn btn-info btn-sm">PDF</a>
+    @if(Gate::check('jurusan') || Gate::check('prodi'))
+    <a href="/showJawaban/{{$idForm}}" class="btn btn-info btn-sm">All Jawaban</a>
+    @endif
   </div>
 </div>
 </div>
-@foreach($pertanyaan as $p)
+
 <div class="col-7 grid-margin">
                   <div class="card mb-3">                            
   <div class="card-body">
- 
+    <h4 class="card-title">Search</h4>
+    <input id="myInput" type="text" class="form-control" placeholder="Search..">
+  </div>
+</div>
+</div>
+
+@foreach($pertanyaan as $p)
+
+<div class="col-7 grid-margin myDIV">
+
+                  <div class="card mb-3">                            
+  <div class="card-body">
  
   <h4 class="card-title">{{$p->label}}</h4>    
     <canvas id="doughnutChart{{$p->name}}" ></canvas>
@@ -25,7 +39,7 @@
 
 @endforeach
 @foreach($pertanyaan2 as $p)
-<div class="col-7 grid-margin">
+<div class="col-7 grid-margin myDIV">
                   <div class="card mb-3">                            
   <div class="card-body">
   <h4 class="card-title">{{$p->label}}</h4>
@@ -43,7 +57,7 @@
 </div>
 @endforeach
 @foreach($pertanyaan3 as $p)
-<div class="col-7 grid-margin">
+<div class="col-7 grid-margin myDIV">
                   <div class="card mb-3">                            
   <div class="card-body">
   <h4 class="card-title">{{$p->label}}</h4>
@@ -58,13 +72,13 @@
   @endif
   
 @endforeach
-  </div>
+</div>
 </div>
 </div>
 @endforeach
 @section('script')
 @foreach($pertanyaan as $p)
-<?php 
+<?php
 $data = $dt[$p->name];
 ?>
 <script>
@@ -114,6 +128,30 @@ $data = $dt[$p->name];
 </script>
 @endforeach
 
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    
+    $('.myDIV').removeClass('d-none')
+    if(value){
+      $('.myDIV').addClass('d-none')
+      $.each($('.myDIV'), function(i,v){
+        if($(v).text().toLowerCase().indexOf(value) > -1){
+          $(v).removeClass('d-none')
+        }
+      
+      })
+      // $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    }
+   
+  });
+//   $('#myInput').on("keyup", function () {
+//     var filter = $(this).val(); // get the value of the input, which we filter on
+//     $('#myDIV').find(".card-title:not(:contains(" + filter + "))").parent().css('display','none');
+// });
+});
+</script>
 @endsection
 
 @endsection

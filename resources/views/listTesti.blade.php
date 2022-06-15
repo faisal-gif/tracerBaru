@@ -43,12 +43,17 @@
   @endforeach -->
 
   @foreach($testimonis as $testim) 
+  
                       <tbody>
+                      
                         <tr>
+                      
                           <td>
-                          {{$testim->biodata->nama}} 
+                          {{optional($testim->biodata)->nama}} 
                           <!-- ini -->
+                            
                           </td>
+                        
                           <td style="width:50%;">
                           {{ Str::limit($testim->testimoni, 50) }}
                           
@@ -85,7 +90,7 @@
                           </a>
                           </td>  
                         </tr>
-                                     
+                               
                @endforeach
 
                @foreach($testimonis as $testim) 

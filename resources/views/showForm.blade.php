@@ -4,13 +4,16 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">List Form</h4>
-                  
+                  @if(Gate::check('admin') || Gate::check('superAdmin'))
                   <a class="btn btn-success btn-sm " href="/buatForm"> Tambah </a>
-                  <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  @endif
+                  <div class="table-responsive pt-3">
+                  <table id="example" class="table table-striped table-bordered" width="100" >
         <thead>
             <tr>
                 <th>Tanggal</th>
                 <th>Nama Form</th>
+                <th>Jenis Form</th>
                 <th>Pertanyaan</th>
                 <th>Hasil Form</th>
                 <th>Copy Link Form</th>
@@ -28,12 +31,15 @@
                           {{$i->namaForm}}
                           </td>
                           <td>
-                          <a class="btn btn-primary btn-sm" href="/showPertanyaan/{{$i->id}}">
+                          {{$i->jenisForm}}
+                          </td>
+                          <td>
+                          <a class="btn btn-primary btn-sm" href="/showPertanyaan/{{$i->jenisForm}}/{{$i->id}}">
                            <i class="ti-pencil"></i>
                           </a>
                           </td>
                            <td>
-                          <a class="btn btn-primary " href="/pertanyaan/{{$i->id}}">
+                          <a class="btn btn-primary " href="/pertanyaan/{{$i->jenisForm}}/{{$i->id}}">
                           Hasil Pertanyaan
                           </a>
                          
@@ -45,14 +51,22 @@
                           
                           </td>
                           <td>
+                          @if(Gate::check('admin') || Gate::check('superAdmin'))
                           <a class="btn btn-primary " href="/showJawaban/{{$i->id}}">
                           Rekap jawaban
                           </a>
+                          @endif
+                          @if(Gate::check('jurusan') || Gate::check('prodi'))
+                          <a class="btn btn-primary " href="/showJawabanUser/{{ Auth::user()->id }}/{{$i->id}}">
+                          Rekap jawaban
+                          </a>
+                          @endif
                           </td>
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -75,7 +89,7 @@
                         <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Copy Link</label>
                        <div class="col-sm-9">
-                         <input type="text" name="copy" id="copy{{$i->id}}" value="{{ route('pertanyaan', [$i->id]) }}" class="form-control">
+                         <input type="text" name="copy" id="copy{{$i->id}}" value="{{ route('pertanyaan', [$i->jenisForm,$i->id]) }}" class="form-control">
                          <button onclick="copyToClipboard('copy{{$i->id}}')"  class="btn btn-primary">
                           <i class="ti-notepad"></i>
                           </button>
