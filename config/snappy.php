@@ -35,7 +35,7 @@ return [
    
     'pdf' => [
         'enabled' => true,
-        'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf.exe'),  
+        'binary' => 'wkhtmltopdf',  
         'timeout' => false,
         'options' => array(),
         'env'     => array(),
@@ -43,7 +43,7 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltoimage.exe'),
+        'binary' => 'wkhtmltopdf',
         'timeout' => false,
         'options' => array(),
         'env'     => array(),
