@@ -35,7 +35,7 @@ return [
    
     'pdf' => [
         'enabled' => true,
-        'binary' => 'wkhtmltopdf',  
+        'binary' => base_path('vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386'),  
         'timeout' => false,
         'options' => array(),
         'env'     => array(),
