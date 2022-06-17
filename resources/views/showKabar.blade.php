@@ -12,7 +12,7 @@
         </p>
         <p>{{$kab->created_at->format('d, M Y')}}</p>
         <h2 class="mb-3">{{$kab->judul}}</h2>
-        <p>{{$kab->kabar}}</p>
+        <p>{!! $kab->kabar !!}</p>
 @endforeach
 </div>
 </div>

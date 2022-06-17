@@ -24,6 +24,8 @@
 
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('images/logo_jti.png')}}" />
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
 <div class="container-scroller">
@@ -40,7 +42,11 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              @if(Auth::user()->biodata === null)
               <img src="{{asset('ad/images/faces/face28.jpg')}}" alt="profile"/>
+              @else
+              <img src="{{asset(Auth::user()->biodata->foto)}}" alt="profile"/>
+              @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="/editProfile/{{ Auth::user()->id }}">
@@ -171,11 +177,25 @@
           </li>
           @endif
           @if(Gate::check('admin') || Gate::check('superAdmin'))
+
+
           <li class="nav-item">
-            <a class="nav-link" href="/formLink" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
+          <a class="nav-link" data-toggle="collapse" href="#form-link" aria-expanded="false" aria-controls="form-elements">
+              <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Link Form</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="form-link">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/formLink">Link Alumni</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-link">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/showLink">Link Perusahaan</a></li>
+              </ul>
+            </div>
+
           </li>
           @endif
           @if(Gate::check('superAdmin'))

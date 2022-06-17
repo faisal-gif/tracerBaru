@@ -18,7 +18,7 @@
 
   <link rel="stylesheet" href="{{asset('hom/css/bootstrap-datepicker.css')}}">
   <link rel="stylesheet" href="{{asset('hom/css/jquery.timepicker.css')}}">
-
+  <link rel="shortcut icon" href="{{asset('images/logo_jti.png')}}" />
 
   <link rel="stylesheet" href="{{asset('hom/css/flaticon.css')}}">
   <link rel="stylesheet" href="{{asset('hom/css/style.css')}}">
@@ -33,7 +33,7 @@
 
      <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item {{ request()->segment(1) == '/' ? 'active' : '' }}"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item {{ request()->segment(1) == '/' ? 'active' : '' }}"><a href="/" class="nav-link">Home</a></li>
           <li class="nav-item {{ (request()->segment(1) == 'about') ? 'active' : '' }}"><a href="/about" class="nav-link">Tentang Kami</a></li>
           <li class="nav-item {{ request()->segment(1) == 'testimoni' ? 'active' : '' }}"><a href="/testimoni" class="nav-link">Alumni</a></li>
           <li class="nav-item {{ request()->segment(1) == 'kabarr' ? 'active' : '' }}"><a href="/kabarr" class="nav-link">Artikel</a></li>

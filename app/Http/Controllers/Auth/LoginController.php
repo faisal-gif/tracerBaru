@@ -30,7 +30,7 @@ use AuthenticatesUsers;
      * @var string
      */
     public function loginCoba(Request $request){
-        $user = User::where([ 
+        $user = User::with('biodata')->where([ 
             'email'  => $request->email,
             'password'  => md5($request->password)
         ])->first(); 

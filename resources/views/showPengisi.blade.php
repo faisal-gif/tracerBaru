@@ -29,7 +29,6 @@
                           {{$j->created_at}}
                           </td>
                           <td>
-                          
                           {{optional($j->biodata)->nama}}
                           </td>
                           <td>

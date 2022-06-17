@@ -9,7 +9,7 @@
   </a>
   <div class="card-body">
     <h5 class="card-title"><a href="/editKabar/{{$k->id}}">{{$k->judul}}</a></h5>
-    <p class="card-text">{{ Str::limit($k->kabar, 130),$end='...' }}</p>
+    <p class="card-text">{!! Str::limit($k->kabar, 130),$end='...' !!}</p>
     <p class="card-text"><small class="text-muted">status : {{$k->status}}</small></p>
     <p class="card-text"><small class="text-muted">note : {{$k->note}}</small></p>
     <p class="card-text"><small class="text-muted">{{$k->created_at->format('d, M Y')}}</small></p>

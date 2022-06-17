@@ -26,10 +26,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       $this->middleware(function($request, $next){
-            if(Gate::allows('admin')||Gate::allows('alumni')||Gate::allows('jurusan')||Gate::allows('prodi') || Gate::allows('superAdmin')) return $next($request);
+        $this->middleware(function ($request, $next) {
+            if (Gate::allows('admin')||Gate::allows('alumni')||Gate::allows('jurusan')||Gate::allows('prodi') || Gate::allows('superAdmin')) {
+                return $next($request);
+            }
             abort(403, 'Anda tidak memiliki cukup hak akses');
-        })->except('welcome','showProfile');
+        })->except('welcome', 'showProfile','linkS');
     }
 
     /**
@@ -41,29 +43,36 @@ class HomeController extends Controller
     {
         $b=biodata::all()->count();
         $j=jawaban::all()->count();
-        return view('home',compact('b','j'));
+        return view('home', compact('b', 'j'));
     }
     public function welcome()
     {
-        $kabar= kabarJurusan::where('status','setuju')->orderBy('id', 'DESC')->take(3)->get();
+        $kabar= kabarJurusan::where('status', 'setuju')->orderBy('id', 'DESC')->take(3)->get();
         $testimonis = testimoni::with('biodata')->where('status', 'setuju')->get();
         $kuis=kirimForm::all()->first();
-        return view('welcome',compact('kabar','testimonis','kuis'));
+        return view('welcome', compact('kabar', 'testimonis', 'kuis'));
     }
     public function showProfile($nim)
     {
         $bio=  biodata::where('nim', $nim)->get();
         return view('showProfile', ['bio'=>$bio]);
     }
-    public function user(){
-        $user=User::all(); 
+    public function user()
+    {
+        $user=User::all();
         return view('showUser', compact('user'));
-        }
+    }
+    public function linkS()
+    {
+        $user=biodata::all();
+        return view('showLink', compact('user'));
+    }
         
-    public function email(){
+    public function email()
+    {
         $bio=  biodata::all();
         $link=kirimForm::all()->first();
-        foreach ($bio as $b ) {
+        foreach ($bio as $b) {
             $details = [
                 'title' => 'Kepada Yth. Alumni JTI Polinema',
                 'body' => '
@@ -79,19 +88,16 @@ class HomeController extends Controller
         
        
         dd("Email is Sent.");
-        }
-        public function whatsappNotification()
-        {
-            $sid    = "AC6f5a79e42795a97142536a0f1b3cfb0c";
-            $token  = "057296a3219f9f3a6c9b88c91de42127";
-            $wa_from= "+14155238886";
-            $twilio = new Client($sid, $token);
+    }
+    public function whatsappNotification()
+    {
+        $sid    = "AC6f5a79e42795a97142536a0f1b3cfb0c";
+        $token  = "057296a3219f9f3a6c9b88c91de42127";
+        $wa_from= "+14155238886";
+        $twilio = new Client($sid, $token);
             
-            $body = "Hello, welcome to codelapan.com.";
+        $body = "Hello, welcome to codelapan.com.";
     
-            return $twilio->messages->create("whatsapp:+62895389118844",["from" => "whatsapp:$wa_from", "body" => $body]);
-        }
-
+        return $twilio->messages->create("whatsapp:+62895389118844", ["from" => "whatsapp:$wa_from", "body" => $body]);
+    }
 }
-
-

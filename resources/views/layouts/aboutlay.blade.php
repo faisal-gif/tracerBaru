@@ -18,7 +18,7 @@
 
 	<link rel="stylesheet" href="{{asset('hom/css/bootstrap-datepicker.css')}}">
 	<link rel="stylesheet" href="{{asset('hom/css/jquery.timepicker.css')}}">
-
+	<link rel="shortcut icon" href="{{asset('images/logo_jti.png')}}" />
 	
 	<link rel="stylesheet" href="{{asset('hom/css/flaticon.css')}}">
 	<link rel="stylesheet" href="{{asset('hom/css/style.css')}}">

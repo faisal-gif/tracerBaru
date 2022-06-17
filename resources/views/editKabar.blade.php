@@ -70,7 +70,7 @@
                         <div class="form-group row">
                           <label class="col-sm-2 col-form-label">Isi</label>
                           <div class="col-sm-9">
-                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="18" name="isi">{{$kab->kabar}}</textarea>
+                          <textarea class="form-control" id="summernote" name="isi">{{$kab->kabar}}</textarea>
                           </div>
                         </div>
                       </div>
@@ -82,7 +82,9 @@
                 </div>
               </div>
             </div>
-            
+@section('script')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>   
 <script>
        function readURL(input) {
             if (input.files && input.files[0]) {
@@ -96,6 +98,10 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+$('#summernote').summernote({
+        height: 500,
+        width: 800
+    });    
 </script>
-            
+@endsection            
 @endsection

@@ -99,6 +99,11 @@ Route::get('/registerU', function () {
 Route::post('/registerUser','userController@create');
 Route::post('/buatUser','Auth\RegisterController@buatUser');
 Route::get('/showUser','HomeController@user');
+Route::get('/showLink','HomeController@linkS');
+Route::post('/editUser','userController@editUser');
+Route::post('/multipleLink','userController@mLink');
+Route::get('/deleteUser/{id}','userController@deleteUser');
+
 
 //email
 Route::get('/formLink','pertanyaanController@formLink');
