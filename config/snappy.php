@@ -35,18 +35,18 @@ return [
    
     'pdf' => [
         'enabled' => true,
-        'binary' => base_path('vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64'),  
+        'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf.exe'),  
         'timeout' => false,
-        'options' => [],
-        'env'     => [],
+        'options' => array(),
+        'env'     => array(),
     ],
     
     'image' => [
         'enabled' => true,
-        'binary' => base_path('vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64'),
+        'binary' => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltoimage.exe'),
         'timeout' => false,
-        'options' => [],
-        'env'     => [],
+        'options' => array(),
+        'env'     => array(),
     ],
 
 ];
