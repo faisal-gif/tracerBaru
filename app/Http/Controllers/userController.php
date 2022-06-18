@@ -45,4 +45,24 @@ class userController extends Controller
         
         return redirect()->back();
     }
+    public function editAcc(Request $request)
+    {
+        $ed=User::where('id', $request->input('id'))->first();
+        $pass=$request->input('newPassword');
+        $passOl=$request->input('oldPassword');
+        $chck=$ed->password;
+        
+        $ed->email = $request->input('userName');
+       
+        if ($pass != null) {
+            if($passOl == $chck){
+                $ed->password =  md5($pass);
+            }
+            else{
+                return redirect()->back()->withErrors(['msg' => 'Password Lama Anda Salah']);
+            }
+        }
+        $ed->save();
+        return redirect()->back()->with('success', 'Data telah tersimpan');
+    }
 }

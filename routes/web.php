@@ -101,6 +101,7 @@ Route::post('/buatUser','Auth\RegisterController@buatUser');
 Route::get('/showUser','HomeController@user');
 Route::get('/showLink','HomeController@linkS');
 Route::post('/editUser','userController@editUser');
+Route::post('/accEdit','userController@editAcc');
 Route::post('/multipleLink','userController@mLink');
 Route::get('/deleteUser/{id}','userController@deleteUser');
 

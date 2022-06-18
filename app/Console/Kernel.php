@@ -31,10 +31,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
       
-        
-        $body = "Hello, welcome to codelapan.com.";
-
-      
         $schedule->call(function  () {
             $bio=biodata::where('status','subscribe')->get();
             $link=kirimForm::all()->first();
@@ -53,13 +49,14 @@ class Kernel extends ConsoleKernel
                     Terima Kasih, Admin.',
                     'link' => $link->link,
                     'nama' => $b->nama
-                ];               
-                $wa="Mengingatkan kepada {$b->nama} untuk mengisi kuisioner tracer study pada tautan dibawah sistem. Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema. Terima Kasih, Admin. : http://tugascoba.herokuapp.com/pertanyaan/629dc361b45b09bc450e2a92";
-                Mail::to($b->email)->send(new MyMail($details));
+                ];
+                Mail::to($b->email)->send(new MyMail($details));               
+                $wa="Mengingatkan kepada {$b->nama} untuk mengisi kuisioner tracer study pada tautan dibawah sistem. Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema. Terima Kasih, Admin. : ".$link->link;
+               
                 $twilio->messages->create("whatsapp:+62895389118844",["from" => "whatsapp:$wa_from" ,"body" =>$wa]);
                 
             }
-        })->everyMinute();
+        })->timezone('Asia/Bangkok',)->at('11:10');
         
         
                 

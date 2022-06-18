@@ -8,33 +8,33 @@
     <strong>Data Tersimpan</strong> {!! \Session::get('success') !!}
   </div>
 @endif
+@if($errors->any())
+<div class="alert alert-danger">
+  <strong>Error</strong> {{$errors->first()}}
+</div>
+@endif
                   <h4 class="card-title">Biodata Alumni</h4>
-                  <form class="form-sample" method="POST" action="/updateAlum" enctype="multipart/form-data">
-                    @csrf
+                  
+                   
                     <p class="card-description">
                     Account
                     </p>
                     <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"> UserName</label>
-                          <div class="col-sm-9">
-                          <input type="text" class="form-control" name="username" value="{{ Auth::user()->email }}">
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"> Password</label>
-                          <div class="col-sm-9">
-                          <input type="text" class="form-control" name="password" value="{{ Auth::user()->password }}">
-                          </div>
-                        </div>
-                      </div>
+                        <div class="col-sm-9">
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#accModal">
+                    Edit Account
+                    </button>
+                    </div>
+                    </div>
+                    </div>
+                    
                       
                       </div>
+                      <form class="form-sample" method="POST" action="/updateAlum" enctype="multipart/form-data">
                     <p class="card-description">
+                    @csrf
                     Data Diri
                     </p>
                     @foreach($bio as $b)
@@ -110,7 +110,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
                           <div class="col-sm-9">
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="tanggalLahir" value="{{$b->tanggalLahir}}"/>
+                            <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="tanggalLahir" value="{{$b->tanggalLahir}}"/>
                           </div>
                         </div>
                       </div>
@@ -240,6 +240,60 @@
                 </div>
               </div>
             </div>
+
+                   <!-- Modal -->
+                   <form class="form-sample" method="POST" action="/accEdit" enctype="multipart/form-data">
+                   <div class="modal fade bd-example-modal-lg" id="accModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                
+                    @csrf
+                    <div class="row">
+                      <div class="col-md-6">
+                        
+                      
+                        <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Username</label>
+                       <div class="col-sm-9">
+                       <input type="text" class="form-control" name="userName" value="{{ Auth::user()->username }}">
+                       <input type="hidden" class="form-control" name="id" value="{{ Auth::user()->id }}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Password Lama</label>
+                       <div class="col-sm-9">
+                       <input type="password" class="form-control" name="oldPassword" >
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Password Baru</label>
+                       <div class="col-sm-9">
+                       <input type="password" class="form-control" name="newPassword" >
+                          </div>
+                        </div>
+                        
+                        
+
+                      </div>
+                    
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
             @section('script')
 <script>
        function readURL(input) {
