@@ -6,7 +6,7 @@
   <div class="card-body">
     <h4 class="card-title">Menu</h4>
     <a href="/exportJawaban/{{$idForm}}" class="btn btn-info btn-sm"> Excel</a>
-    <a href="/jawabanPdf/{{$idForm}}" class="btn btn-info btn-sm">PDF</a>
+    <input type="button" id="bt" class="btn btn-info btn-sm" onclick="printJS('printJS-form', 'html')" value="PDF" />
     @if(Gate::check('jurusan') || Gate::check('prodi'))
     <a href="/showJawaban/{{$idForm}}" class="btn btn-info btn-sm">All Jawaban</a>
     @endif
@@ -22,7 +22,7 @@
   </div>
 </div>
 </div>
-
+<div id="printJS-form">
 @foreach($pertanyaan as $p)
 
 <div class="col-7 grid-margin myDIV">
@@ -76,6 +76,7 @@
 </div>
 </div>
 @endforeach
+</div>
 @section('script')
 @foreach($pertanyaan as $p)
 <?php
@@ -152,6 +153,11 @@ $(document).ready(function(){
 // });
 });
 </script>
+
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+<!--the script-->
+
 @endsection
 
 @endsection
