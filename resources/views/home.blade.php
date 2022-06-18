@@ -14,14 +14,14 @@
             </div>
           </div>
           <div class="row">
-          <div class="col-md-6 grid-margin stretch-card">
+          <!-- <div class="col-md-6 grid-margin stretch-card">
                   <div class="card position-relative">
                     <div class="card-body" >
                         <h4 class="card-title">Pie chart</h4>
                          <canvas id="pieChart"></canvas>
                     </div>
                   </div>
-              </div>     
+              </div>      -->
             <div class="col-md-6 grid-margin transparent">
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">

@@ -10,6 +10,7 @@ use App\kirimForm;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\alumniImport;
+use App\Imports\userImport;
 use App\Imports\dataAlumniImport;
 
 class alumniController extends Controller
@@ -153,6 +154,7 @@ class alumniController extends Controller
 		$nama_file = rand().$file->getClientOriginalName();
 		$file->move('file_bio',$nama_file);
 		Excel::import(new alumniImport, public_path('/file_bio/'.$nama_file));
+        Excel::import(new userImport, public_path('/file_bio/'.$nama_file));
 		return redirect()->back();
 	}
     public function importAlumni(Request $request) 

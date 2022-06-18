@@ -13,7 +13,7 @@
   <strong>Error</strong> {{$errors->first()}}
 </div>
 @endif
-                  <h4 class="card-title">Biodata Alumni</h4>
+                  <h4 class="card-title">Edit User</h4>
                   
                    
                     <p class="card-description">
@@ -32,6 +32,7 @@
                     
                       
                       </div>
+                      @if( Auth::user()->roles == 'alumni')
                       <form class="form-sample" method="POST" action="/updateAlum" enctype="multipart/form-data">
                     <p class="card-description">
                     @csrf
@@ -237,7 +238,9 @@
                     <button type="submit" class="btn btn-primary mb-2">Save</button>
                     <a href="/home" class="btn btn-danger mb-2">close</a>
                   </form>
+                  @endif
                 </div>
+                
               </div>
             </div>
 

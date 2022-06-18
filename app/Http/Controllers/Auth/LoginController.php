@@ -42,7 +42,7 @@ use AuthenticatesUsers;
 
     }
     public function redirectTo(){
-        if(auth()->user()->roles=='admin' || auth()->user()->roles=='prodi'|| auth()->user()->roles=='jurusan' || auth()->user()->roles=='superAdmin'){
+        if(auth()->user()->roles=='admin' || auth()->user()->roles=='prodi'|| auth()->user()->roles=='jurusan' || auth()->user()->roles=='superAdmin' || auth()->user()->roles=='akreditasi'){
             return redirect('/home/'.auth()->user()->id);
         }elseif(auth()->user()->roles=='alumni'){
             return redirect('/alumniDash/'.auth()->user()->id);

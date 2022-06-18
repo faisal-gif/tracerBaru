@@ -368,8 +368,7 @@
   <script src="{{asset('hom/js/jquery.animateNumber.min.js')}}"></script>
   <script src="{{asset('hom/js/bootstrap-datepicker.js')}}"></script>
   <script src="{{asset('hom/js/scrollax.min.js')}}"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{asset('hom/js/google-map.js')}}"></script>
   <script src="{{asset('hom/js/main.js')}}"></script>
 

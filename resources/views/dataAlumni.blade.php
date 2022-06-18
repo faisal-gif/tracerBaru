@@ -59,7 +59,20 @@
                     @csrf
                     <div class="row">
                       <div class="col-md-6">
+                      <div class="form-group row">
+                       <div class="col-sm-9">
+                        Isi Dengan Format Template dibawah
                         
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                       <div class="col-sm-9">
+                         <a href="{{asset('templateExcel/DATA ALUMNI.xlsx')}}">Template Data Alumni</a>
+                      
+                          </div>
+                        </div>
+
                         <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Import Biodata</label>
                        <div class="col-sm-9">

@@ -43,7 +43,7 @@
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               @if(Auth::user()->biodata === null)
-              <img src="{{asset('ad/images/faces/face28.jpg')}}" alt="profile"/>
+              <img src="{{asset('images/logo_jti.png')}}" alt="profile"/>
               @else
               <img src="{{asset(Auth::user()->biodata->foto)}}" alt="profile"/>
               @endif
@@ -138,12 +138,13 @@
           </li>
          
           <li class="nav-item">
-
+          @if(Gate::check('alumni') || Gate::check('superAdmin') || Gate::check('admin'))
             <a class="nav-link" data-toggle="collapse" href="#form-testimoni" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Kata Alumni</span>
               <i class="menu-arrow"></i>
             </a>
+            @endif
             @if(Gate::check('alumni') || Gate::check('superAdmin'))
             <div class="collapse" id="form-testimoni">
               <ul class="nav flex-column sub-menu">

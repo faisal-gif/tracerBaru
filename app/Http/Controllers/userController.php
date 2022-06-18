@@ -48,8 +48,8 @@ class userController extends Controller
     public function editAcc(Request $request)
     {
         $ed=User::where('id', $request->input('id'))->first();
-        $pass=$request->input('newPassword');
-        $passOl=$request->input('oldPassword');
+        $pass=md5($request->input('newPassword'));
+        $passOl=md5($request->input('oldPassword'));
         $chck=$ed->password;
         
         $ed->email = $request->input('userName');

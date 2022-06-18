@@ -51,7 +51,7 @@
                           <i class="fa fa-paper-plane"></i>
                           </button> |
                           @endif
-                          <a class="btn btn-primary btn-sm" href="/editPertanyaan/{{$jenisForm}}/{{$p->id}}">
+                          <a class="btn btn-primary btn-sm" href="/editPertanyaan/{{$p->id}}">
                            <i class="ti-pencil"></i>
                           </a> | 
                           <a class="btn btn-danger btn-sm" href="/deletePertanyaan/{{$p->id}}">

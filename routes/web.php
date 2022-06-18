@@ -64,7 +64,7 @@ Route::post('/prosesBuat', 'pertanyaanController@prosesBuat');
 Route::get('/pertanyaan/{jenisForm?}/{idForm}/{nim?}', 'pertanyaanController@pertanyaan')->name('pertanyaan');
 Route::post('/copyPertanyaan/{idForm}', 'pertanyaanController@copyPertanyaan');
 Route::get('/deletePertanyaan/{id}', 'pertanyaanController@delPertanyaan');
-Route::get('/editPertanyaan/{jenisForm}/{id}', 'pertanyaanController@editPertanyaan');
+Route::get('/editPertanyaan/{id}', 'pertanyaanController@editPertanyaan');
 Route::post('/prosesEdit', 'pertanyaanController@prosesEdit');
 Route::post('/jawaban', 'pertanyaanController@prosesIsi');
 Route::get('/showJawaban/{idForm}', 'pertanyaanController@showJawaban');
