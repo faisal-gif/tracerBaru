@@ -10,14 +10,19 @@ class userController extends Controller
 {
     public function create(Request $request)
     {
-        User::create([
-            'id' => $request->input('userName'),
-            'name' => $request->input('name'),
-            'email' => $request->input('userName'),
-            'password' =>  md5($request->input('password')),
-            'roles' => $request->input('roles')
-        ]);
-        return redirect()->back();
+        $chk=$request->input('userName');
+        if ($chk != null) {
+            User::create([
+                'id' => preg_replace('/[^a-zA-Z0-9_-]/s ', '', $chk),
+                'name' => $request->input('name'),
+                'email' => $chk,
+                'password' =>  md5($request->input('password')),
+                'roles' => $request->input('roles')
+            ]);
+            return redirect()->back()->with('success', 'Data telah tersimpan');
+        } else {
+            return redirect()->back()->withErrors(['msg' => 'Username Anda Kosong']);
+        }
     }
     public function editUser(Request $request)
     {
@@ -30,18 +35,18 @@ class userController extends Controller
         }
         $ed->roles = $request->input('roles');
         $ed->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data telah teredit');
     }
     public function deleteUser($id)
     {
-        $del=User::where('id',$id)->first();
+        $del=User::where('id', $id)->first();
         $del->delete();
         return redirect()->back();
     }
     public function mLink(Request $request)
     {
         $nim=$request->id;
-        $ed=biodata::whereIn('nim',$nim)->update(['link' => $request->link]);
+        $ed=biodata::whereIn('nim', $nim)->update(['link' => $request->link]);
         
         return redirect()->back();
     }
@@ -55,10 +60,9 @@ class userController extends Controller
         $ed->email = $request->input('userName');
        
         if ($pass != null) {
-            if($passOl == $chck){
+            if ($passOl == $chck) {
                 $ed->password =  md5($pass);
-            }
-            else{
+            } else {
                 return redirect()->back()->withErrors(['msg' => 'Password Lama Anda Salah']);
             }
         }

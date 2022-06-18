@@ -1,8 +1,20 @@
 @extends('layouts.lay')
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
+
               <div class="card">
+              
                 <div class="card-body">
+                @if($errors->any())
+<div class="alert alert-danger">
+  <strong>Data Tidak disimpan</strong> {{$errors->first()}}
+</div>
+@endif
+@if (\Session::has('success'))
+<div class="alert alert-success">
+    <strong>Data Tersimpan</strong> {!! \Session::get('success') !!}
+  </div>
+@endif
                   <h4 class="card-title">User</h4>
                   <div class="table-responsive pt-3">
                   <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#inputModal">

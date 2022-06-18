@@ -43,7 +43,7 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
             User::create([
-            'id' => $request->input('userName'),
+            'id' => preg_replace('/[^a-zA-Z0-9_-]/s ', '', $request->input('userName')),
             'name' => $request->input('name'),
             'email' => $request->input('userName'),
             'password' =>  md5($request->input('password')),
