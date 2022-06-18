@@ -33,10 +33,10 @@ class pertanyaanController extends Controller
     {
         return view('buatForm');
     }
-    public function editPertanyaan($id)
+    public function editPertanyaan($jenisForm,$id)
     {
         $pertanyaan=pertanyaan::where('_id', $id)->get();
-        return view('editPertanyaan', compact('pertanyaan'));
+        return view('editPertanyaan', compact('pertanyaan','jenisForm'));
     }
     public function listPertanyaan($jenisForm, $idForm)
     {

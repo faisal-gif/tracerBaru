@@ -23,7 +23,7 @@
                             <textarea name="nama" class="form-control" cols="30" rows="10">{{$p->label}}</textarea>
                             <input type="hidden" name="id" value="{{$p->_id}}"/>
                             <input type="hidden" name="idForm" value="{{$p->idForm}}"/>
-                            <input type="hidden" name="jenisForm" value="{{$p->jenisForm}}"/>
+                            <input type="hidden" name="jenisForm" value="{{$jenisForm}}"/>
                           </div>
                         </div>
                         <div class="form-group row">
@@ -33,6 +33,7 @@
                             <option value="text">text</option>
                             <option value="textarea">textarea</option>
                             <option value="file" >file</option>
+                            <option value="date" >date</option>
                             <option value="select">select</option>
                             <option value="choice">pilihan</option>
                             

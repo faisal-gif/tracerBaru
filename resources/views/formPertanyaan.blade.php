@@ -33,6 +33,7 @@
                             <option value="text">text</option>
                             <option value="textarea">textarea</option>
                             <option value="file" >file</option>
+                            <option value="date" >date</option>
                             <option value="select" id="coba">select</option>
                             <option value="choice" id="coba">pilihan</option>
                             
