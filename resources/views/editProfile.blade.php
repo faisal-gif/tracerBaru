@@ -110,7 +110,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
                           <div class="col-sm-9">
-                            <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="tanggalLahir" value="{{$b->tanggalLahir}}"/>
+                            <input type="date" class="form-control" name="tanggalLahir" value="{{$b->tanggalLahir}}"/>
                           </div>
                         </div>
                       </div>
