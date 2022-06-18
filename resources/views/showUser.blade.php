@@ -111,6 +111,7 @@
                               <option>admin</option>
                               <option>jurusan</option>
                               <option>prodi</option>
+                              <option>akreditasi</option>
                             </select>
                           </div>
                         </div>
@@ -173,6 +174,7 @@
                               <option value="jurusan" {{ $u->roles == 'jurusan' ? 'selected' : '' }}>jurusan</option>
                               <option value="prodi" {{ $u->roles == 'prodi' ? 'selected' : '' }}>prodi</option>
                               <option value="alumni" {{ $u->roles == 'alumni' ? 'selected' : '' }}>alumni</option>
+                              <option value="akreditasi" {{ $u->roles == 'akreditasi' ? 'selected' : '' }}>akreditasi</option>
                           </select>
                           </div>
                         </div>
