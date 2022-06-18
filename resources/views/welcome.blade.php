@@ -55,8 +55,7 @@
           <span class="subheading">Selamat Datang</span>
           <h1 class="mb-4">Tracer Study Jurusan Teknologi Informasi</h1>
           <!-- <p class="caps">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p> -->
-          <p class="mb-0"><a href="#" class="btn btn-primary">Our Course</a> <a href="#" class="btn btn-white">Learn
-              More</a></p>
+          <p class="mb-0"><a href="{{$kuis->link}}" class="btn btn-primary">Isi Kuisoner</a></p>
         </div>
       </div>
     </div>
