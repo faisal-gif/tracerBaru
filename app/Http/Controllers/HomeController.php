@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            if (Gate::allows('admin')||Gate::allows('alumni')||Gate::allows('jurusan')||Gate::allows('prodi') || Gate::allows('superAdmin')|| Gate::allows('akreditasis')) {
+            if (Gate::allows('admin')||Gate::allows('alumni')||Gate::allows('jurusan')||Gate::allows('prodi') || Gate::allows('superAdmin')|| Gate::allows('akreditasi')) {
                 return $next($request);
             }
             abort(403, 'Anda tidak memiliki cukup hak akses');
