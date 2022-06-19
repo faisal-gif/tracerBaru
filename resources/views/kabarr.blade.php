@@ -1,5 +1,6 @@
 @extends('layouts.testi')
 @section('content')
+@section('judul','Kabar Jurusan')
 @foreach($kabar as $kab)
         <div class="col-lg-4 ftco-animate">
           <div class="blog-entry">
@@ -13,8 +14,8 @@
                  
                 </p>
               </div>
-              <h3 class="heading"><a href="/showKabar/{{$kab->id}}">{{ Str::limit($kab->judul, 30),$end='......' }}</a></h3>
-              <p> {!! Str::limit($kab->kabar, 20),$end='...' !!}</p>
+              <h3 class="heading"><a href="/showKabar/{{$kab->id}}">{{ $kab->judul }}</a></h3>
+             
               <p><a href="/showKabar/{{$kab->id}}" class="btn btn-secondary py-2 px-3">Read more</a></p>
             </div>
           </div>

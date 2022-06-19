@@ -1,4 +1,5 @@
 @extends('layouts.testi')
+@section('judul','Kata Alumni')
 @section('content')
 @foreach ($testim as $testim)
 <div class="col-md-6 col-lg-3 ftco-animate align-items-stretch">
