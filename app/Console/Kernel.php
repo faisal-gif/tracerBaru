@@ -56,7 +56,7 @@ class Kernel extends ConsoleKernel
                 $twilio->messages->create("whatsapp:+62895389118844",["from" => "whatsapp:$wa_from" ,"body" =>$wa]);
                 
             }
-        })->timezone('Asia/Bangkok',)->at('14:13');
+        })->timezone('Asia/Bangkok',)->at('07:32');
         
         
                 
