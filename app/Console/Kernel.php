@@ -50,13 +50,13 @@ class Kernel extends ConsoleKernel
                     'link' => $link->link,
                     'nama' => $b->nama
                 ];
-                Mail::to($b->email)->send(new MyMail($details));               
+                // Mail::to($b->email)->send(new MyMail($details));               
                 $wa="Mengingatkan kepada {$b->nama} untuk mengisi kuisioner tracer study pada tautan dibawah sistem. Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema. Terima Kasih, Admin. : ".$link->link;
                
                 $twilio->messages->create("whatsapp:+62895389118844",["from" => "whatsapp:$wa_from" ,"body" =>$wa]);
                 
             }
-        })->timezone('Asia/Bangkok',)->at('07:32');
+        })->timezone('Asia/Bangkok',)->at('09:44');
         
         
                 

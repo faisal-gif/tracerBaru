@@ -265,7 +265,7 @@
                         <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Username</label>
                        <div class="col-sm-9">
-                       <input type="text" class="form-control" name="userName" value="{{ Auth::user()->username }}">
+                       <input type="text" class="form-control" name="userName" value="{{ Auth::user()->email }}">
                        <input type="hidden" class="form-control" name="id" value="{{ Auth::user()->id }}">
                           </div>
                         </div>
