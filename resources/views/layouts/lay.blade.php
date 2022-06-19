@@ -76,7 +76,7 @@
       
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      @if(Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin'))
+      @if(Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin') || Gate::check('akreditasi'))
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -113,7 +113,7 @@
             </div>
           </li>
           @endif
-          @if(Gate::check('alumni') || Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin'))
+          @if(Gate::check('alumni') || Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin') || Gate::check('akreditasi'))
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-kabar" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-paper menu-icon"></i>
@@ -160,7 +160,7 @@
             </div>
             @endif
           </li>
-          @if(Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin'))
+          @if(Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin') || Gate::check('akreditasi'))
            
                 <li class="nav-item">
                 <a class="nav-link" href="/listForm" aria-controls="form-elements">
