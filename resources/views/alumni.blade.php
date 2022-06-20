@@ -49,7 +49,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">No HP</label>
                           <div class="col-sm-9">
-                            <input type="number" class="form-control" name="noHp" placeholder="+62"/>
+                            <input type="number" class="form-control" name="noHp" id="test" placeholder="+62"/>
                           </div>
                         </div>
                       </div>
@@ -236,6 +236,13 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+</script>
+<script>
+  $("#test").on("input", function() {
+  if (/^0/.test(this.value)) {
+    this.value = this.value.replace(/^0/, "")
+  }
+})
 </script>
 @endsection            
 @endsection

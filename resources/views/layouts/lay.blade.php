@@ -145,7 +145,7 @@
               <i class="menu-arrow"></i>
             </a>
             @endif
-            @if(Gate::check('alumni') || Gate::check('superAdmin'))
+            @if(Gate::check('alumni'))
             <div class="collapse" id="form-testimoni">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="/formAlumni">Form Kata Alumni</a></li>
