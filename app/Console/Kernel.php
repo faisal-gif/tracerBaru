@@ -52,12 +52,14 @@ class Kernel extends ConsoleKernel
                     'nama' => $b->nama
                 ];
                  Mail::to($b->email)->send(new MyMail($details));               
-                $wa="Mengingatkan kepada {$b->nama} untuk mengisi kuisioner tracer study pada tautan dibawah sistem. Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema. Terima Kasih, Admin. : ".$link->link;
+                $wa="Mengingatkan kepada {$b->nama} untuk mengisi kuisioner tracer study pada tautan dibawah sistem. Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema. Terima Kasih, Admin 
+Berikut Link kuisoner : {$link->link} 
+Untuk Mengisi Kuisioner silahkan mengisi email yang sudah terdaftar pada sistem, email tersebut sebagai berikut :{$b->email} ";
                
                 $twilio->messages->create("whatsapp:+62".$b->noHp,["from" => "whatsapp:$wa_from" ,"body" =>$wa]);
                 
             }
-        })->timezone('Asia/Bangkok',)->at('21:48');
+        })->timezone('Asia/Bangkok',)->at('14:22');
         
         
                 

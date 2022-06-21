@@ -21,7 +21,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Nama</label>
+                          <label class="col-sm-3 col-form-label">Pertanyaan</label>
                           <div class="col-sm-9">
                             <input type="text" class="form-control" name="nama"/>
                           </div>
@@ -58,11 +58,11 @@
   var x = document.getElementById("type").value;
   if (x == "choice" ) {
     
-    $("#dynamicTable").append('<div class="form-group row" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[0]" placeholder="Enter your Price" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
+    $("#dynamicTable").append('<div class="form-group row" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[0]" placeholder="Isi pilihan" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
     var i = 0;
     $("#add").click(function(){
         ++i;
-        $("#dynamicTable").append('<div class="form-group row" id="isi">  <div class="col-sm-9"> <input type="text" class="form-control" name="isi['+i+']" placeholder="Enter your Price" class="form-control" /></div> <button type="button" class="btn btn-danger remove-tr">Remove</button> </div> ');
+        $("#dynamicTable").append('<div class="form-group row" id="isi">  <div class="col-sm-9"> <input type="text" class="form-control" name="isi['+i+']" placeholder="Isi pilihan" class="form-control" /></div> <button type="button" class="btn btn-danger remove-tr">Remove</button> </div> ');
 
     });
     $(document).on('click', '.remove-tr', function(){  
@@ -73,11 +73,11 @@
 }
 else if(x == "select"){
   $("#isi").remove();
-  $("#dynamicTable").append('<div class="form-group row" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[0]" placeholder="Enter your Price" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
+  $("#dynamicTable").append('<div class="form-group row" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[0]" placeholder="Isi pilihan" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
     var i = 0;
     $("#add").click(function(){
         ++i;
-        $("#dynamicTable").append('<div class="form-group row" id="isi">  <div class="col-sm-9"> <input type="text" class="form-control" name="isi['+i+']" placeholder="Enter your Price" class="form-control" /></div> <button type="button" class="btn btn-danger remove-tr">Remove</button> </div> ');
+        $("#dynamicTable").append('<div class="form-group row" id="isi">  <div class="col-sm-9"> <input type="text" class="form-control" name="isi['+i+']" placeholder="Isi pilihan" class="form-control" /></div> <button type="button" class="btn btn-danger remove-tr">Remove</button> </div> ');
 
     });
     $(document).on('click', '.remove-tr', function(){  

@@ -21,7 +21,7 @@
                         </div>
                       </div>
                     </div>
-                    <input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
+                    <input type="submit" name="save" id="save" class="btn btn-primary" value="Kirim" />
                    
                     </form>
         </div>

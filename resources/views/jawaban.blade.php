@@ -1,5 +1,6 @@
 @extends('layouts.lay')
 @section('content')
+<div class="container">
 
 <div class="col-7 grid-margin">
                   <div class="card mb-3">                            
@@ -8,7 +9,9 @@
     <a href="/exportJawaban/{{$idForm}}" class="btn btn-info btn-sm"> Excel</a>
     <input type="button" id="bt" class="btn btn-info btn-sm" onclick="printJS('printJS-form', 'html')" value="PDF" />
     @if(Gate::check('jurusan') || Gate::check('prodi'))
-    <a href="/showJawaban/{{$idForm}}" class="btn btn-info btn-sm">All Jawaban</a>
+    <a class="btn btn-primary " href="/showJawabanUser/{{ Auth::user()->id }}/{{ $idForm }}">
+    Rekap jawaban User
+    </a>
     @endif
   </div>
 </div>
@@ -22,7 +25,7 @@
   </div>
 </div>
 </div>
-<div id="printJS-form">
+<div class="row" id="printJS-form">
 @foreach($pertanyaan as $p)
 
 <div class="col-7 grid-margin myDIV">
@@ -76,6 +79,8 @@
 </div>
 </div>
 @endforeach
+
+</div>
 </div>
 @section('script')
 @foreach($pertanyaan as $p)

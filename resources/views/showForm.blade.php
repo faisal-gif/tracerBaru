@@ -51,16 +51,11 @@
                           
                           </td>
                           <td>
-                          @if(Gate::check('admin') || Gate::check('superAdmin'))
+                          
                           <a class="btn btn-primary " href="/showJawaban/{{$i->id}}">
                           Rekap jawaban
                           </a>
-                          @endif
-                          @if(Gate::check('jurusan') || Gate::check('prodi'))
-                          <a class="btn btn-primary " href="/showJawabanUser/{{ Auth::user()->id }}/{{$i->id}}">
-                          Rekap jawaban
-                          </a>
-                          @endif
+                          
                           </td>
                         </tr>
                         @endforeach
