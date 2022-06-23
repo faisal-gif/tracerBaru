@@ -15,7 +15,7 @@
     <strong>Data Tersimpan</strong> {!! \Session::get('success') !!}
   </div>
 @endif
-                  <h4 class="card-title">User</h4>
+                  <h4 class="card-title">Pengguna</h4>
                   <div class="table-responsive pt-3">
                   <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#inputModal">
                   Tambah
@@ -25,22 +25,19 @@
                       <thead>
                         <tr>
                           <th>
-                            Id User
+                          Id Pengguna
                           </th>
                           <th>
-                            Nama User
+                            Nama Pengguna
                           </th>
                           <th>
                             username
                           </th>
                           <th>
-                            Password
-                          </th>
-                          <th>
                             Role
                           </th>
                           <th>
-                            Action
+                            Aksi
                           </th>
                         </tr>
                       </thead>
@@ -56,9 +53,6 @@
                           </td>
                           <td>
                           {{$u->email}}
-                          </td>
-                          <td>
-                          {{$u->password}}  
                           </td>
                           <td>
                           {{$u->roles}}  
@@ -86,7 +80,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Register User</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Daftar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -148,7 +142,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Pengguna</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

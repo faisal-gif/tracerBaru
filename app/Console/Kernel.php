@@ -48,6 +48,7 @@ class Kernel extends ConsoleKernel
                     Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema.
                     Terima Kasih, Admin.',
                     'email' => $b->email,
+                    'emailP' =>$b->link,
                     'link' => $link->link,
                     'nama' => $b->nama
                 ];
@@ -59,7 +60,7 @@ Untuk Mengisi Kuisioner silahkan mengisi email yang sudah terdaftar pada sistem,
                 $twilio->messages->create("whatsapp:+62".$b->noHp,["from" => "whatsapp:$wa_from" ,"body" =>$wa]);
                 
             }
-        })->timezone('Asia/Bangkok',)->at('14:22');
+        })->timezone('Asia/Bangkok',)->at('11:39');
         
         
                 

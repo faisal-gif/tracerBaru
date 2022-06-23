@@ -12,11 +12,11 @@
         <thead>
             <tr>
                 <th>Tanggal</th>
-                <th>Nama Form</th>
+                <th>Judul Form</th>
                 <th>Jenis Form</th>
                 <th>Pertanyaan</th>
-                <th>Hasil Form</th>
-                <th>Copy Link Form</th>
+                <th>Pratinjau</th>
+                <th>Salin Tautan Form</th>
                 <th>Rekap Jawaban</th>
                 
             </tr>

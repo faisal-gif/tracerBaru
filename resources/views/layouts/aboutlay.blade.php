@@ -34,7 +34,7 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item {{ request()->segment(1) == '/' ? 'active' : '' }}"><a href="/" class="nav-link">Home</a></li>
+					<li class="nav-item {{ request()->segment(1) == '/' ? 'active' : '' }}"><a href="/" class="nav-link">Beranda</a></li>
 					<li class="nav-item {{ (request()->segment(1) == 'about') ? 'active' : '' }}"><a href="/about" class="nav-link">Tentang Kami</a></li>
 					<li class="nav-item {{ request()->segment(1) == 'testimoni' ? 'active' : '' }}"><a href="/testimoni" class="nav-link">Alumni</a></li>
 					<li class="nav-item {{ request()->segment(1) == 'kabarr' ? 'active' : '' }}"><a href="/kabarr" class="nav-link">Artikel</a></li>
@@ -52,7 +52,7 @@
 			<div class="row no-gutters slider-text align-items-end justify-content-center">
 				<div class="col-md-9 ftco-animate pb-5 text-center">
 					<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>About <i class="fa fa-chevron-right"></i></span></p>
-					<h1 class="mb-0 bread">About Tracer Study</h1>
+					<h1 class="mb-0 bread">Tentang Tracer Study</h1>
 				</div>
 			</div>
 		</div>

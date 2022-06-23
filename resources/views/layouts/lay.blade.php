@@ -51,12 +51,12 @@
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="/editProfile/{{ Auth::user()->id }}">
                 <i class="ti-settings text-primary"></i>
-                Profile
+                Profil
               </a>
               <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 <i class="ti-power-off text-primary"></i>
-                Logout
+                Keluar
               </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -105,7 +105,7 @@
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/showBiodata">All Biodata</a></li>
+                <li class="nav-item"><a class="nav-link" href="/showBiodata">Alumni Terdaftar</a></li>
               </ul>
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="/dataAlumni">Data Alumni</a></li>
@@ -155,7 +155,7 @@
              @if(Gate::check('admin') || Gate::check('superAdmin'))
             <div class="collapse" id="form-testimoni">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/listTestii">List Kata Alumni</a></li>
+                <li class="nav-item"><a class="nav-link" href="/listTestii">Daftar Kata Alumni</a></li>
               </ul>
             </div>
             @endif
@@ -173,7 +173,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/showPengisi" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">List Penjawab</span>
+              <span class="menu-title">Daftar Penjawab</span>
             </a>
           </li>
           @endif
@@ -183,17 +183,17 @@
           <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#form-link" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Link Form</span>
+              <span class="menu-title">Tautan Form</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-link">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/formLink">Link Alumni</a></li>
+                <li class="nav-item"><a class="nav-link" href="/formLink">Tautan Alumni</a></li>
               </ul>
             </div>
             <div class="collapse" id="form-link">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/showLink">Link Perusahaan</a></li>
+                <li class="nav-item"><a class="nav-link" href="/showLink">Tautan Perusahaan</a></li>
               </ul>
             </div>
 
@@ -203,7 +203,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/showUser" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">showUser</span>
+              <span class="menu-title">Pengguna</span>
             </a>
           </li>
           @endif

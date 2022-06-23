@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\biodata;
+use App\dataAlumni;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -56,16 +57,22 @@ class RegisterController extends Controller
     protected function buatUser(Request $request)
     {
         $nim=$request->input('nim');
-        $chk=biodata::where('nim',$nim)->first();
-        if ($chk == null) {
-            User::create([
+        $chk1=dataAlumni::where('nim',$nim)->first();    
+        if($chk1 != null){
+            $chk=biodata::where('nim', $nim)->first();
+            if ($chk == null) {
+                User::create([
             'id' => $request->input('nim'),
             'name' => $request->input('nim'),
-            'email' => $request->input('email'),
+            'email' => $request->input('username'),
             'password' =>  md5($request->input('password')),
             'roles' => 'alumni'
         ]);
-        return redirect('/login');
+                return redirect('/login');
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(['msg' => 'NIM tidak terdaftar di polinema']);
         }
         return redirect()->back()->withErrors(['msg' => 'NIM anda sudah terdaftar']);
     }

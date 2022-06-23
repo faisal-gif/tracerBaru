@@ -4,7 +4,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Link Perusahaan</h4>
+                  <h4 class="card-title">Tautan Perusahaan</h4>
 
                   <form method="post" action="/multipleLink">
                   {{ csrf_field() }}
@@ -17,8 +17,8 @@
                 <tr>
                   <th scope="col"><input type="checkbox" id="checkAll"></th>
                   <th scope="col">NIM</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Link</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Tautan</th>
                 </tr>
               </thead>
               <tbody>
@@ -30,11 +30,11 @@
                     <td>
                       @if($u->link !== null)
                           <a class="btn btn-success btn-sm" href="#">
-                          ada link
+                          ada tautan
                           </a>
                           @else
                           <a class="btn btn-secondary btn-sm" href="#">
-                            tidak ada link
+                            tidak ada tautan
                           </a>
                           @endif
                     </td>

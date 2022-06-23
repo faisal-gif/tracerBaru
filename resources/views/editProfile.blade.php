@@ -13,18 +13,18 @@
   <strong>Error</strong> {{$errors->first()}}
 </div>
 @endif
-                  <h4 class="card-title">Edit User</h4>
+                  <h4 class="card-title">Ubah Akun</h4>
                   
                    
                     <p class="card-description">
-                    Account
+                    Akun
                     </p>
                     <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
                         <div class="col-sm-9">
                     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#accModal">
-                    Edit Account
+                    Ubah Akun
                     </button>
                     </div>
                     </div>

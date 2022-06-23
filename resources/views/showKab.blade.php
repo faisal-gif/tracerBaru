@@ -9,7 +9,7 @@
                       <thead>
                         <tr>
                           <th>
-                            Tanggal Upload
+                            Tanggal Unggah
                           </th>
                           <th>
                             Judul
@@ -21,7 +21,7 @@
                             Status
                           </th>
                           <th>
-                            Action
+                            Aksi
                           </th>
                         </tr>
                       </thead>
@@ -41,15 +41,15 @@
                           <td>
                             @if($k->status === 'setuju')
                           <a class="btn btn-success btn-sm" href="#">
-                           Yes
+                           Setuju
                           </a>
                           @elseif($k->status === 'tolak')
                           <a class="btn btn-danger btn-sm" href="#">
-                           No
+                           Tolak
                           </a>
                           @else
                           <a class="btn btn-secondary btn-sm" href="#">
-                           Waiting
+                           Tunggu
                           </a>
                           @endif
                           </td>
@@ -100,7 +100,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label class="col-sm-2 col-form-label">Note</label>
+                          <label class="col-sm-2 col-form-label">Catatan</label>
                           <div class="col-sm-9">
                           <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" name="note"></textarea>
                           </div>

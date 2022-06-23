@@ -15,8 +15,8 @@
                 <th>Nama</th>
                 <th>Prodi</th>
                 <th>Tahun Lulus</th>
-                <th>Details</th>
-                <th>Action</th>
+                <th>Detail</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>

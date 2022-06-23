@@ -36,7 +36,7 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item active"><a href="/" class="nav-link">Beranda</a></li>
           <li class="nav-item"><a href="/about" class="nav-link">Tentang Kami</a></li>
           <li class="nav-item"><a href="/testimoni" class="nav-link">Alumni</a></li>
           <li class="nav-item"><a href="/kabarr" class="nav-link">Artikel</a></li>
@@ -72,7 +72,7 @@
   <strong>Error</strong> {{$errors->first()}}
 </div>
 @endif
-            <h3 class="mb-4">Register Now</h3>
+            <h3 class="mb-4">Daftar</h3>
             <form action="/buatUser" class="signup-form" method="POST">
             @csrf
               <div class="form-group">
@@ -89,14 +89,14 @@
                 <input id="password-field" name="password" type="password" class="form-control" placeholder="Password">
               </div>
               <div class="form-group">
-                <label class="label" for="password">Confirm Password</label>
+                <label class="label" for="password">Konfirmasi Password</label>
                 <input id="password-field" type="password" class="form-control" placeholder="Confirm Password">
               </div>
               <div class="form-group d-flex justify-content-end mt-4">
                 <button type="submit" class="btn btn-primary submit"><span class="fa fa-paper-plane"></span></button>
               </div>
             </form>
-            <p class="text-center">Already have an account? <a href="#signin">Sign In</a></p>
+            <p class="text-center">Sudah Punya Akun? <a href="#signin">Sign In</a></p>
           </div>
         </div>
       </div>
