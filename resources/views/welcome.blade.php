@@ -90,7 +90,7 @@
               </div>
               <div class="form-group">
                 <label class="label" for="password">Konfirmasi Password</label>
-                <input id="password-field" type="password" class="form-control" placeholder="Confirm Password">
+                <input id="password-field" type="password" class="form-control" placeholder="Konfirmasi Password">
               </div>
               <div class="form-group d-flex justify-content-end mt-4">
                 <button type="submit" class="btn btn-primary submit"><span class="fa fa-paper-plane"></span></button>
