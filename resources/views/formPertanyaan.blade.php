@@ -27,15 +27,15 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Type</label>
+                          <label class="col-sm-3 col-form-label">Tipe</label>
                           <div class="col-sm-9">
                           <select name="type" id="type" onchange="myFunction()">
                             <option value="text">text</option>
                             <option value="textarea">textarea</option>
                             <option value="file" >file</option>
                             <option value="date" >date</option>
-                            <option value="select" id="coba">select</option>
-                            <option value="choice" id="coba">pilihan</option>
+                            <option value="select" id="coba">dropdown</option>
+                            <option value="choice" id="coba">select</option>
                             
                         </select>
                           </div>

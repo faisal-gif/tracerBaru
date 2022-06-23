@@ -40,7 +40,7 @@
                           </td>
                            <td>
                           <a class="btn btn-primary " href="/pertanyaan/{{$i->jenisForm}}/{{$i->id}}">
-                          Hasil Pertanyaan
+                          Pratinjau
                           </a>
                          
                           

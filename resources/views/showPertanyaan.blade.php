@@ -13,9 +13,9 @@
             <tr>
               
                 <th>Nama pertanyaan</th>
-                <th>Type</th>
+                <th>Tipe</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th>Aksi</th>
                
                 
             </tr>
