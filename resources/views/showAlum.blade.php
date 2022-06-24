@@ -3,7 +3,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Biodata Alumni</h4>
+                  <h4 class="card-title">Alumni Terdaftar</h4>
                   <a class="btn btn-primary btn-sm" href="/formBiodata"> Tambah </a>
                   <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#importModal">Import Excel</button>
                   

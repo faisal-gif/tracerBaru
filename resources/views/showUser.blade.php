@@ -114,10 +114,10 @@
                         <label class="col-sm-3 col-form-label">Roles</label>
                        <div class="col-sm-9">
                        <select class="form-control" name="roles">
-                              <option>admin</option>
-                              <option>jurusan</option>
-                              <option>prodi</option>
-                              <option>akreditasi</option>
+                              <option value="admin">admin</option>
+                              <option value="jurusan">jurusan</option>
+                              <option value="prodi">kurikulum</option>
+                              <option value="akreditasi">akreditasi</option>
                             </select>
                           </div>
                         </div>
@@ -178,7 +178,7 @@
                        <select class="form-control" name="roles">
                               <option value="admin" {{ $u->roles == 'admin' ? 'selected' : '' }}>admin</option>
                               <option value="jurusan" {{ $u->roles == 'jurusan' ? 'selected' : '' }}>jurusan</option>
-                              <option value="prodi" {{ $u->roles == 'prodi' ? 'selected' : '' }}>prodi</option>
+                              <option value="prodi" {{ $u->roles == 'prodi' ? 'selected' : '' }}>kurikulum</option>
                               <option value="alumni" {{ $u->roles == 'alumni' ? 'selected' : '' }}>alumni</option>
                               <option value="akreditasi" {{ $u->roles == 'akreditasi' ? 'selected' : '' }}>akreditasi</option>
                           </select>
