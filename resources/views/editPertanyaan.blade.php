@@ -73,14 +73,16 @@
       })
     })
 
+    addTr();
+    removeTr();
+
+  })
+  function addTr(){
     $("#add").click(function(){
       $("#dynamicTable").append('<div class="form-group row isi" id="isi">  <div class="col-sm-9"> <input type="text" class="form-control" name="isi[]" placeholder="Isi pilihan" class="form-control" /></div> <button type="button" class="btn btn-danger remove-tr">Remove</button> </div> ');
       removeTr();
     });
-    removeTr();
-
-  })
-
+  }
   function removeTr(){
     $('.remove-tr').click(function(){
       $(this).parents('#isi').remove();
@@ -91,13 +93,14 @@
   function myFunction(id = '') {
     $("#isi").remove();
     var x = $(`#type_${id}`).val();
-    if(x == "select"){
+    if(x == "select" || "choice"){
       $("#isi").remove();
       $("#dynamicTable").append('<div class="form-group row" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[]" placeholder="Isi pilihan" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
     }
     else{
       $("#isi").remove();
     }
+    addTr();
 }
 </script>
 @endsection
