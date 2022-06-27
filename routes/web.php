@@ -50,7 +50,7 @@ Route::get('/editKabar/{id}', 'kabarController@editKabar');
 Route::post('/prosesEdit/{id}', 'kabarController@prosesEdit');
 Route::get('/deleteKabar/{id}', 'kabarController@deleteKabar');
 Route::get('/filterKab', 'kabarController@filterKab');
-Route::get('/kabarKu/{idUser}','kabarController@kabarKu');
+Route::get('/kabarKu/{idUser?}','kabarController@kabarKu')->name('kabarKu');
 Route::post('/persetujuanKabar/{id}', 'kabarController@statusKabar');
 Route::get('/kabarr', 'kabarController@kabarr');
 

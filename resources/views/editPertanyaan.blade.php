@@ -93,14 +93,20 @@
   function myFunction(id = '') {
     $("#isi").remove();
     var x = $(`#type_${id}`).val();
-    if(x == "select" || "choice"){
-      $("#isi").remove();
-      $("#dynamicTable").append('<div class="form-group row" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[]" placeholder="Isi pilihan" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
+    if(x == "select"){
+      $(".isi").remove();
+      $("#dynamicTable").append('<div class="form-group row isi" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[]" placeholder="Isi pilihan" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
+      addTr();
+    }
+    else if(x == "choice"){
+      $(".isi").remove();
+      $("#dynamicTable").append('<div class="form-group row isi" id="isi"> <div class="col-sm-9"> <input type="text" class="form-control" name="isi[]" placeholder="Isi pilihan" class="form-control" /> </div><button type="button" name="add" id="add" class="btn btn-success">Add More</button></div>');
+      addTr();
     }
     else{
       $("#isi").remove();
     }
-    addTr();
+    
 }
 </script>
 @endsection

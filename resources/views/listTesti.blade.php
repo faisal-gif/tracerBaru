@@ -66,15 +66,15 @@
                           <td>
                             @if($testim->status === 'setuju')
                           <a class="btn btn-success btn-sm" href="#">
-                           Yes
+                           setuju
                           </a>
                           @elseif($testim->status === 'tolak')
                           <a class="btn btn-danger btn-sm" href="#">
-                           No
+                           Tolak
                           </a>
                           @else
                           <a class="btn btn-secondary btn-sm" href="#">
-                           Waiting
+                           tunggu
                           </a>
                           @endif
                           </td>
