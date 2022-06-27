@@ -17,11 +17,9 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "1.0",
         "maatwebsite/excel": "^3.1",
-        "mikehaertl/phpwkhtmltopdf": "^2.5",
         "mongodb/mongodb": "^1.12",
-        "spatie/laravel-cronless-schedule": "1.0.0",
-        "twilio/sdk": "^6.36",
-        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "twilio/sdk": "^6.36"
+        
     },
     "require-dev": {
         "facade/ignition": "^1.16.15",
