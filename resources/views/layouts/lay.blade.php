@@ -126,7 +126,7 @@
                 <li class="nav-item"><a class="nav-link" href="/formKabar">Input Kabar</a></li>
               </ul>
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/kabarKu/{{ Auth::user()->id }}">Daftar Kabar</a></li>
+                <li class="nav-item"><a class="nav-link" href="/kabarKu">Daftar Kabar</a></li>
               </ul>
               @endif
             @if(Gate::check('admin') || Gate::check('superAdmin'))
@@ -145,20 +145,19 @@
               <i class="menu-arrow"></i>
             </a>
             @endif
-            @if(Gate::check('alumni'))
             <div class="collapse" id="form-testimoni">
+            @if(Gate::check('alumni'))
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="/formAlumni">Form Kata Alumni</a></li>
               </ul>
-            </div>
              @endif
              @if(Gate::check('admin') || Gate::check('superAdmin'))
-            <div class="collapse" id="form-testimoni">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="/listTestii">Daftar Kata Alumni</a></li>
               </ul>
-            </div>
+            
             @endif
+            </div>
           </li>
           @if(Gate::check('admin') || Gate::check('jurusan') || Gate::check('prodi') || Gate::check('superAdmin') || Gate::check('akreditasi'))
            
@@ -190,8 +189,6 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="/formLink">Tautan Alumni</a></li>
               </ul>
-            </div>
-            <div class="collapse" id="form-link">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="/showLink">Tautan Perusahaan</a></li>
               </ul>

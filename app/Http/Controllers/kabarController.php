@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\kabarJurusan;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class kabarController extends Controller
@@ -105,8 +105,9 @@ class kabarController extends Controller
         return redirect('/filterKab');
     }
 
-    public function kabarKu($idUser)
+    public function kabarKu()
     {
+        $idUser=Auth::user()->id;
         $kabar= kabarJurusan::where('idUser', $idUser)->get();
         return view('kabarKu', compact('kabar'));
     }
