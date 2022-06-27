@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\alumniImport;
 use App\Imports\userImport;
 use App\Imports\dataAlumniImport;
+use App\Http\Controllers\CloudinaryStorage;
 
 class alumniController extends Controller
 {
@@ -32,15 +33,14 @@ class alumniController extends Controller
     }
     public function proAlumni(Request $request)
     {
-        $file = $request->file('foto');
-
-        $filename = time().'.'.$file->getClientOriginalExtension();
-        $path = $file->move('img', $filename);
-        $place='img/'.$filename;
-   
+        $image = $request->file('foto');
+        $result=" ";
+        if($image != null){
+            $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
+        }
         $add=new biodata([
       'nim' =>$request->input('nim'),
-      'foto' => $place,
+      'foto' => $result,
       'nama' => $request->input('nama'),
       'noHp' => $request->input('noHp'),
       'kotaLahir' => $request->input('kotaLahir'),
@@ -75,8 +75,10 @@ class alumniController extends Controller
 
     public function delAl($nim)
     {
-        $bio= biodata::where('nim', $nim)->delete();
-        return redirect('/showBiodata');
+        $bio= biodata::where('nim', $nim)->first();
+        CloudinaryStorage::delete($bio->foto);
+        $bio->delete();
+        return redirect()->back()->with('success', 'Data telah terhapus');
     }
 
     public function editAl($nim)
@@ -92,10 +94,16 @@ class alumniController extends Controller
 
     public function updateAl(Request $request)
     {
+
         $nim= $request->input('nim');
         $bio= biodata::where('nim', $nim)->first();
         $foto=$request->file('foto');
         $x=$request->input('x');
+        $result =$x;
+        
+        if($foto != null){
+            $result = CloudinaryStorage::replace($x,$foto->getRealPath(), $foto->getClientOriginalName());
+        }
         $bio->nama = $request->input('nama');
         $bio->noHp = $request->input('noHp');
         $bio->kotaLahir = $request->input('kotaLahir');
@@ -111,15 +119,17 @@ class alumniController extends Controller
         $bio->jp = $request->input('jp');
         $bio->namaPerusahaan = $request->input('namaPerusahaan');
         $bio->alamatPerusahaan = $request->input('alamatPerusahaan');
-        if($foto!=null){
-            $filename = time().'.'.$foto->getClientOriginalExtension();
-            $path = $foto->move('img', $filename);
-            $place='img/'.$filename;
-            $bio->foto=$place;
-        }
-        else{
-            $bio->foto=$x;
-        }
+        $bio->foto=$result;
+      
+        // if($foto!=null){
+        //     $filename = time().'.'.$foto->getClientOriginalExtension();
+        //     $path = $foto->move('img', $filename);
+        //     $place='img/'.$filename;
+        //     $bio->foto=$place;
+        // }
+        // else{
+        //     $bio->foto=$x;
+        // }
 
 
         $bio->save();

@@ -45,7 +45,7 @@
               @if(Auth::user()->biodata === null)
               <img src="{{asset('images/logo_jti.png')}}" alt="profile"/>
               @else
-              <img src="{{asset(Auth::user()->biodata->foto)}}" alt="profile"/>
+              <img src="{{Auth::user()->biodata->foto}}" alt="profile"/>
               @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

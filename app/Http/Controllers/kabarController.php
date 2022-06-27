@@ -15,14 +15,11 @@ class kabarController extends Controller
 
     public function inpKabar(Request $request)
     {
-        $file = $request->file('foto');
-        $place="";
-        if ($file != null) {
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $path = $file->move('imgKab', $filename);
-        
-      
-            $place='imgKab/'.$filename;
+        $image = $request->file('foto');
+        $result=" ";
+       
+        if ($result != null) {
+            $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         }
         $content = $request->isi;
         $dom = new \DomDocument();
@@ -49,7 +46,7 @@ class kabarController extends Controller
           'judul' => $request->input('judul'),
           'tag' => $request->input('tag'),
           'kabar' => $content,
-          'img' => $place
+          'img' => $result
         ]);
         $add->save();
       
@@ -72,19 +69,16 @@ class kabarController extends Controller
     {
         $kabar= kabarJurusan::where('_id', $id)->first();
         $x=$request->input('x');
-        $isi=$request->file('foto');
+        $foto=$request->file('foto');
+        $result =$x;
+        if($foto != null){
+            $result = CloudinaryStorage::replace($x,$foto->getRealPath(), $foto->getClientOriginalName());
+        }
         $kabar->judul=$request->input('judul');
         $kabar->tag=$request->input('tag');
         $kabar->kabar=$request->input('isi');
-        if ($isi!=null) {
-            $filename = time().'.'.$isi->getClientOriginalExtension();
-            $path = $isi->move('imgKab', $filename);
-            $kabar->img=(string) $path;
-            $kabar->save();
-        } else {
-            $kabar->img=$x;
-            $kabar->save();
-        }
+        $kabar->img=$result;
+        $kabar->save();
         return redirect()->back()->with('success', 'Data telah teredit');
     }
 
@@ -96,7 +90,8 @@ class kabarController extends Controller
 
     public function deleteKabar($id)
     {
-        $kabar= kabarJurusan::where('_id', $id);
+        $kabar= kabarJurusan::where('_id', $id)->first();
+        CloudinaryStorage::delete($kabar->img);
         $kabar->delete();
         return redirect()->back();
     }

@@ -405,44 +405,6 @@ class pertanyaanController extends Controller
         
         return Excel::download($export, 'coba.xlsx');
     }
-    public function export_pdf($idForm)
-    {
-        $pilGan=['choice','select'];
-        $isian=['text','textarea'];
-        $pertanyaan=pertanyaan::whereIn('type', $pilGan)->where('idForm', $idForm)->get();
-        $pertanyaan2=pertanyaan::whereIn('type', $isian)->where('idForm', $idForm)->get();
-        $jawaban=jawaban::where('idForm', $idForm)->get();
-        $dt=[];
-        
-        
-        foreach ($pertanyaan as $key => $p) {
-            // dd($p->choices);
-    
-
-            foreach ($p->choices as $ckey => $cval) {
-                $dt[$p->name][$p->choices[$ckey]] = 0;
-                // dd($dt);
-       
-                foreach ($jawaban as $j) {
-                    if (isset($j->pilihanGanda[$p->name])) {
-                        if ($j->pilihanGanda[$p->name] == $p->choices[$ckey]) {
-                            $dt[$p->name][$j->pilihanGanda[$p->name]] += 1;
-                        }
-                    }
-                }
-            }
-        }
-        
-        $pdf=PDF::loadView('pdfJawaban', compact('pertanyaan', 'pertanyaan2', 'dt', 'jawaban'));
-        $pdf->setOption('enable-javascript', true);
-        $pdf->setOption('javascript-delay', 1000);
-        $pdf->setOption('no-stop-slow-scripts', true);
-        $pdf->setOption('enable-smart-shrinking', true);
-       
-       
-   
-        return $pdf->stream();
-    }
     public function copyPertanyaan($idForm, Request $request)
     {
         $tasks = pertanyaan::where('idForm', $request->input('formCopy'))->get()->toArray();

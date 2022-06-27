@@ -71,7 +71,6 @@ Route::get('/showJawaban/{idForm}', 'pertanyaanController@showJawaban');
 Route::get('/showJawabanUser/{idUser}/{idForm}', 'pertanyaanController@showJawabanUser');
 Route::get('/showPengisi', 'pertanyaanController@listPengisi');
 Route::get('/exportJawaban/{idForm}', 'pertanyaanController@export_excel');
-Route::get('/jawabanPdf/{idForm}', 'pertanyaanController@export_pdf');
 Route::post('/persetujuanPertanyaan/{id}', 'pertanyaanController@statusPertanyaan');
 
 

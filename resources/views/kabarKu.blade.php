@@ -5,7 +5,7 @@
 <div class="col-lg-6 grid-margin stretch-card">
                   <div class="card mb-3">
                   <a href="/showKabar/{{$k->id}}">
-  <img class="card-img-top" src="{{asset($k->img)}}" height="300" alt="Card image cap">
+  <img class="card-img-top" src="{{$k->img}}" height="300" alt="Card image cap">
   </a>
   <div class="card-body">
     <h5 class="card-title"><a href="/editKabar/{{$k->id}}">{{$k->judul}}</a></h5>

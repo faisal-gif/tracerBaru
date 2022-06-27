@@ -44,7 +44,7 @@
                         <div class="form-group row">
                         <label class="col-sm-3 col-form-label"></label>
                           <div class="col-sm-9">
-                          <img id="blah" src="{{asset($b->foto)}}" alt="your image"  width="150" height="150"/>
+                          <img id="blah" src="{{ $b->foto }}" alt="your image"  width="150" height="150"/>
                           </div>
                         </div>
                       </div>

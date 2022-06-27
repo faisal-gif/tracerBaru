@@ -10,7 +10,7 @@
    <div class="col-md-4 ftco-animate d-flex align-items-center align-items-stretch">
     <div class="staff-2 w-100">
      <div class="img-wrap d-flex align-items-stretch">
-      <div class="img align-self-stretch d-flex align-items-end" style="background-image: url({{asset($b->foto)}});">
+      <div class="img align-self-stretch d-flex align-items-end" style="background-image: url({{$b->foto}});">
        <div class="text mb-4 text-md-center">
         <h3>{{$b->nama}}</h3>
         

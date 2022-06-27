@@ -72,7 +72,7 @@
       <div class="modal-body">
         <label><h6> Foto </h6></label>
         <br>
-      <img id="blah" src="{{asset($b->foto)}}" alt="your image"  width="250" />
+      <img id="blah" src="{{$b->foto}}" alt="your image"  width="250" />
 
       <table>
         <thead>

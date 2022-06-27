@@ -4,7 +4,7 @@
 @foreach($kabar as $kab)
         <div class="col-lg-4 ftco-animate">
           <div class="blog-entry">
-            <a href="/showKabar/{{$kab->id}}" class="block-20" style="background-image: url({{asset($kab->img)}});">
+            <a href="/showKabar/{{$kab->id}}" class="block-20" style="background-image: url({{$kab->img}});">
             </a>
             <div class="text d-block">
               <div class="meta">
