@@ -48,19 +48,21 @@ class Kernel extends ConsoleKernel
                     Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema.
                     Terima Kasih, Admin.',
                     'email' => $b->email,
-                    'emailP' =>$b->link,
+                    'linkP' =>$b->link,
                     'link' => $link->link,
                     'nama' => $b->nama
                 ];
                  Mail::to($b->email)->send(new MyMail($details));               
                 $wa="Mengingatkan kepada {$b->nama} untuk mengisi kuisioner tracer study pada tautan dibawah sistem. Partisipasi anda akan sangat berharga bagi berkembangnya JTI Polinema. Terima Kasih, Admin 
 Berikut Link kuisoner : {$link->link} 
-Untuk Mengisi Kuisioner silahkan mengisi email yang sudah terdaftar pada sistem, email tersebut sebagai berikut :{$b->email} ";
+Untuk Mengisi Kuisioner silahkan mengisi email yang sudah terdaftar pada sistem, email tersebut sebagai berikut :{$b->email} 
+dan mengingatkan jika berkenan untuk memberikan dibawah link kuisoner untu pimpinan perusahaan atau pimpinan tim 
+Berikut Link Pimpinan : $b->link";
                
                 $twilio->messages->create("whatsapp:+62".$b->noHp,["from" => "whatsapp:$wa_from" ,"body" =>$wa]);
                 
             }
-        })->timezone('Asia/Bangkok',)->at('11:39');
+        })->timezone('Asia/Bangkok',)->at('13:49');
         
         
                 
